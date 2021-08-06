@@ -1,0 +1,18 @@
+<form novalidate [formGroup]="myForm">
+  <div class="section" *ngFor="let sect of options">
+    <div class="section-head">
+      <h5 class="section-title">{{ field.notranslate ? sect : buildLabel(sect, prefix + '.' + field.name + 'S.' + sect) }}</h5>
+      <fa-icon [icon]="['fas', 'plus']" (click)="add(sect)"></fa-icon>
+    </div>
+    <div class="section-body" *ngFor="let sct of innerModel[sect]; let i = index">
+      <mat-form-field class="subsection" *ngFor="let subfield of field.fields; let s = index">
+        <mat-select [errorStateMatcher]="subfield.validators ? subfield.validators.errorState : ''" [required]="subfield.validators && subfield.validators.required" formControlName="{{ field.name + ',' + sect + ',' + i + ',' + subfield.name }}" (selectionChange)="update(sect, i, subfield.name, $event.value)" (blur)="blur.emit()" (focus)="focus.emit()" placeholder="{{ (prefix + '.' + (field.displayName || field.name) + 'S.' + subfield.name) | uppercase | translate }}">
+          <mat-option *ngFor="let val of subfield.options" [value]="val">
+            {{ field.format ? field.format(val) : val }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <fa-icon [icon]="['fas', 'minus']" (click)="remove(sect, i)"></fa-icon>
+    </div>
+  </div>
+</form>

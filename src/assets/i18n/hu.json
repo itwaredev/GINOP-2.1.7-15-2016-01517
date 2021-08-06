@@ -1,0 +1,255 @@
+{
+  "LANGUAGES": {
+    "EN": "Angol",
+    "HU": "Magyar"
+  },
+  "TOOLBAR": {
+    "LOGOUT": "Kijelentkezés",
+    "FILTER": "Szűrés",
+    "EXPORT": "Export"
+  },
+  "TABLE": {
+    "ITEMS": "",
+    "NEXT": "Követekző",
+    "PREVIOUS": "Előző",
+    "RANGE": "{first} - {last} a(z) {length} sorból",
+    "NODATA": "Nincs megjeleníthető adat"
+  },
+  "MENU": {
+    "MAIN": "Nyitóoldal",
+    "LOGIN": "Bejelentkezés",
+    "SETTINGS": "Beállítások",
+    "IMPRESSUM": "Impresszum",
+    "OVERVIEW": "Áttekintés",
+    "VEHICLEVIEW": "Jármű Nézet",
+    "VEHICLE_STATUS": "Jármű adatok",
+    "VEHICLE_ROUTES": "Útvonalak",
+    "VEHICLE_ALERTS": "Riasztások",
+    "VEHICLE_REPORTS": "Statisztikák",
+    "STATISTIC": "Statisztikák",
+    "ALERT": "Riasztások"
+  },
+  "MESSAGES": {
+    "OK": "OK",
+    "ERROR": "Hiba",
+    "BAD_CREDENTIALS": "Hibás felhasználónév vagy jelszó!",
+    "UNKNOWN": "Ismeretlen hiba",
+    "SERVICE_NOT_AVAILABLE": "A szolgáltatás nem elérhető. Ellenőrizze a kapcsolatot vagy próbálja később.",
+    "UNAVAILABLE_FUNCTION": "Ez a funkció jelenleg nem érhető el.",
+    "MINIMUM_CLIENT_VERSION": "A szolgáltatás használatához frissítse az alkalmazást!"
+  },
+  "LOGIN": {
+    "TITLE": "Flottakezelés",
+    "CUSTOMERNAME": "Ügyfél",
+    "USERNAME": "Felhasználónév",
+    "PASSWORD": "Jelszó",
+    "LOGIN_BTN": "Bejelentkezés"
+  },
+  "FLEET_VIEW_MENU": {
+    "MAP": "Térkép",
+    "VEHICLE": "Járművek",
+    "ALERT": "riasztás",
+    "ALERTS": "Riasztások",
+    "FLEET": "Flotta"
+  },
+  "ACTION": {
+    "MOVING": "Mozog",
+    "STANDBY": "Áll",
+    "FILTER": "Szűrés",
+    "CAN_GO": "Mehet",
+    "CONFIRMATION_NOTICE": "Biztos benne?",
+    "CONFIRMATION_DELETE": "Biztosan TÖRLI?",
+    "ADD": "Új",
+    "SAVE": "Mentés",
+    "YES": "Igen",
+    "CANCEL": "Mégsem",
+    "DELETE": "Törlés",
+    "CLICK_HERE": "Kattints ide..."
+  },
+  "SIDENAV_ITEMS": {
+    "STATISTIC": "Statisztikák",
+    "ALERT": "Riasztások",
+    "SETTINGS": "Beállítások",
+    "HELP": "Segítség",
+    "IMPRINT": "Impresszum",
+    "NEWS": "Újdonságok"
+  },
+  "FILTER_VEHICLE": {
+    "TITLE": "Járművek szűrése",
+    "LICENSEPLATE": "Rendszám",
+    "PERIOD": "Időszak",
+    "DRIVERNAME": "Sofőr",
+    "GROUP": "Csoport",
+    "CLEAR_FILTER": "Töröl",
+    "DRIVER": "Sofőr",
+    "ALARM_TYPE": "Riasztás típus",
+    "CLOSE": "Mehet",
+    "DATE": "Dátum"
+  },
+  "VEHICLE_DATA": {
+    "LAST_UPDATE": "Utolsó frissítés",
+    "RPM": "Fordulatszám",
+    "ACCELERATOR_POS": "Gázpedál pozíció",
+    "ODOMETER": "Km óra állása",
+    "STATUS": "Státusz",
+    "OFFICIAL": "Hivatali",
+    "PRIVATE": "Magán",
+    "NO_DATA": "A jármű még nem küldött adatot",
+    "NO_MOVE_YET": "A jármű nem mozgott",
+    "NO_STOP_WITHIN_PERIOD": "A jármű az adott időszakon belül nem állt meg.",
+    "NO_DATA_AVAILABLE": "A jármű ma nem állt meg.",
+    "SPEED_UNIT": "km/h"
+  },
+  "ALERT": {
+    "TODAY_ALERT": "Mai riasztás",
+    "OLD_ALERT": "Régebbi riasztás",
+    "TYPE": {
+      "RULE_ALERT": "Szabályszegés",
+      "GEOFENCING_ALERT": "Zónaelhagyás",
+      "STATIC_ALERT": "Emlékeztető"
+    },
+    "ALERTS": "Riasztások",
+    "REMINDERS": "Emlékeztetők",
+    "CONTACTS": "Kapcsolatok",
+    "CONTACT": {
+      "CONTACT": "Értesítendő",
+      "CONTACTTYPE": "Értesítési csatorna",
+      "CONTACTTYPES": {
+        "SMS": "SMS",
+        "PUSH": "Mobilalkalmazás",
+        "EMAIL": "Email"
+      }
+    },
+    "SETUP": {
+      "CONTACT": "Értesítendő",
+      "VEHICLES": "Járművek",
+      "TYPE": "Típus",
+      "ALERTMESSAGE": "Üzenet",
+      "MAXODOMETER": "Max megtett km",
+      "MAXSPEED": "Max sebesség",
+      "MAXRPM": "Max fordulatszám",
+      "CONTACTS_FIRST": "Célszerű először a kapcsolatokat beállítani."
+    },
+    "REMINDER": {
+      "CONTACT": "Értesítendő",
+      "DATE": "Emlékeztető ideje",
+      "MESSAGE": "Üzenet"
+    }
+  },
+  "SETTINGS": {
+    "GENERAL": "Általános",
+    "VEHICLE_DATA_REFRESH_INTERVAL": "Frissítési gyakoriság",
+    "VEHICLE_DATA_REFRESH_INTERVALS": {
+      "30000": "30 másodperc",
+      "60000": "1 perc",
+      "120000": "2 perc",
+      "300000": "5 perc"
+    },
+    "MAP_SHOWN_DETAILS": "Térkép részletek",
+    "MAP_SHOWN_DETAILSS": {
+      "LICENSEPLATE": "Rendszám",
+      "DRIVERNAME": "Sofőr",
+      "VEHICLENAME": "Jármű neve"
+    },
+    "WORKING_TIMEZONE": "Időzóna",
+    "WORKING_DAYS": "Munkanap",
+    "WORKING_DAYSS": {
+      "0MONDAY": "Hétfő",
+      "1TUESDAY": "Kedd",
+      "2WEDNESDAY": "Szerda",
+      "3THURSDAY": "Csütörtök",
+      "4FRIDAY": "Péntek",
+      "5SATURDAY": "Szombat",
+      "6SUNDAY": "Vasárnap"
+    },
+    "WORKING_HOURS": "Munkaidő",
+    "WORKING_HOURSS": {
+      "MONDAY": "Hétfő",
+      "TUESDAY": "Kedd",
+      "WEDNESDAY": "Szerda",
+      "THURSDAY": "Csütörtök",
+      "FRIDAY": "Péntek",
+      "SATURDAY": "Szombat",
+      "SUNDAY": "Vasárnap",
+      "START": "Kezdete",
+      "END": "Vége"
+    }
+  },
+  "IMPRESSUM": {
+    "OWNER": "ITware",
+    "ADDRESS": "Cím",
+    "PHONE": "Telefon",
+    "WEBSITE": "Weboldal",
+    "EMAIL": "E-mail",
+    "NOTICE": "A {APP_NAME} szoftver teljes egészében az ITware Kft tulajdona."
+  },
+  "STATISTICS": {
+    "INTERVAL": {
+      "DAY": "Nap",
+      "WEEK": "Hét",
+      "MONTH": "Hónap"
+    }
+  },
+  "REPORT": {
+    "FLEET_STAT": "Flotta statisztika",
+    "VEHICLE_STAT": "Jármű statisztika",
+    "DRIVER_STAT": "Sofőr statisztika",
+    "SUM_DATA": {
+      "DISTANCE": "Megtett út",
+      "AVG_CONSUMPT": "Átlagfogyasztás",
+      "MAX_SPEED": "Maximális sebesség"
+    },
+    "GRAPH_LABEL": {
+      "DISTANCE": "Megtett km",
+      "UTILISATION": "Kihasználtság",
+      "ON_IGNITION": "Gyújtással állt"
+    },
+    "OFFICIAL": "hivatali",
+    "PRIVATE": "magán",
+    "NOTICE": "A {APP_NAME} szoftver teljes egészében az ITware Kft. tulajdona.",
+    "NO_DATA": "nincs adat",
+    "HOUR": "óra",
+    "MINUTES": "perc",
+    "IGNITION": "gyújtáson volt, nem haladt",
+    "ON_MOVE": "haladt",
+    "WORKED": "dolgozott",
+    "NOT_WORKED": "nem dolgozott",
+    "SUM": "napi összes",
+    "NO_INTERVAL_DATA": "A választott intervallumon belül nem áll rendelkezésre adat",
+    "NOT_WORKDAY": "A választott napra/napokra nem lett munkaidő beállítva",
+    "AVERAGE": "Átlag",
+    "UNKNOWN": "Ismeretlen"
+  },
+  "MODEM_REPORT": {
+    "id": "#",
+    "gpsTime": "Idő",
+    "licensePlate": "Rendszám",
+    "vehicleName": "Név",
+    "longitude": "GPS hosszúság",
+    "latitude": "GPS szélesség",
+    "altitude": "GPS magasság",
+    "angle": "Irány",
+    "speedometer": "Sebesség",
+    "ignition": "Gyújt.",
+    "alarm": "Riasztás",
+    "private_or_official": "H/M kapcs.",
+    "speed": "Modem sebess.",
+    "rpm": "Fordulatszám",
+    "temperature": "Hőmérséklet",
+    "lvspeed": "Lv sebesség",
+    "accelerator_pedal_pos": "Gázpedál",
+    "total_fuel": "Össz üzemanyag",
+    "engine_rpm": "Fordulatszám2",
+    "trip_odometer": "Út km állás",
+    "fuel_level": "Üzemany. szint",
+    "odometer": "Km óra állás",
+    "fuel_level_percent": "Üzemany. %",
+    "fuel_level_percent_can": "Üzemany. % (CAN)",
+    "ibutton": "Sofőr azonosító",
+    "incr_fuel": "Elemi fogyasztás",
+    "accel_value": "Gyorsulás",
+    "towing": "Vontatás",
+    "operator_code": "Mobilszolg.",
+    "accel_type": "Gyorsulás irány"
+  }
+}

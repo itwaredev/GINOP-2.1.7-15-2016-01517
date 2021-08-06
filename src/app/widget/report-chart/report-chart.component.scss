@@ -1,0 +1,19 @@
+@import 'src/variables';
+
+.main-bg {
+    position: relative;
+    canvas {
+        margin-top: 0.5rem;
+    }
+    div {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        z-index: 100;
+        cursor: pointer;
+    }
+}
+mat-card {
+    margin: 20px;
+    text-align: center;
+}

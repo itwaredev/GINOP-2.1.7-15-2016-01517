@@ -1,0 +1,46 @@
+<app-interval-select></app-interval-select>
+<app-vehicle-selector *ngIf="!hideSelector" #vehicleSelector (vehicleIdChange)="setVehicleData({vehicleId: $event})"></app-vehicle-selector>
+<mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="{{ 'REPORT.GRAPH_LABEL.DISTANCE' | translate }}">
+        <app-report-chart
+        (switchToObject)="vehicleSelected.emit($event)"
+        [chartSourceData]="chartSourceData"
+        [progressBarSourceData]="progressBarSourceData"
+        [chartTypes]="[chartTypes.DISTANCE, chartTypes.TIME, chartTypes.DISTANCE_PERCENTAGE, chartTypes.TIME_PERCENTAGE]"
+        [datasetMeta]="[
+            { prefix: 'official', color: '#89bf42', label: translateService.instant('REPORT.OFFICIAL') },
+            { prefix: 'private', color: '#417a97', label: translateService.instant('REPORT.PRIVATE') }
+        ]"
+        storageKey="distance-report">
+        </app-report-chart>
+    </mat-tab>
+    <mat-tab label="{{ 'REPORT.GRAPH_LABEL.UTILISATION' | translate }}">
+        <app-report-chart
+        (switchToObject)="vehicleSelected.emit($event)"
+        [chartSourceData]="chartSourceData"
+        [progressBarSourceData]="progressBarSourceData"
+        [chartTypes]="[chartTypes.TIME, chartTypes.TIME_PERCENTAGE]"
+        [datasetMeta]="[
+            { prefix: 'workingIgnition', color: '#89bf42', label: translateService.instant('REPORT.WORKED') },
+            { prefix: 'notWorkingIgnition', color: '#417a97', label: translateService.instant('REPORT.NOT_WORKED') }
+        ]"
+        [noDataLabel]="utilisationNoLabel"
+        sumFieldInfix="Work"
+        storageKey="utilisation-report">
+        </app-report-chart>
+    </mat-tab>
+    <mat-tab label="{{ 'REPORT.GRAPH_LABEL.ON_IGNITION' | translate }}">
+        <app-report-chart
+        (switchToObject)="vehicleSelected.emit($event)"
+        [chartSourceData]="chartSourceData"
+        [progressBarSourceData]="progressBarSourceData"
+        [chartTypes]="[chartTypes.TIME, chartTypes.TIME_PERCENTAGE]"
+        [datasetMeta]="[
+            { prefix: 'driving', color: '#89bf42', label: translateService.instant('REPORT.ON_MOVE') },
+            { prefix: 'idle', color: '#417a97', label: translateService.instant('REPORT.IGNITION') }
+        ]"
+        sumFieldInfix="Ignition"
+        storageKey="ignition-report">
+        </app-report-chart>
+    </mat-tab>
+</mat-tab-group>

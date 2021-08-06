@@ -1,0 +1,14 @@
+<app-interval-select></app-interval-select>
+
+<app-progressbar-set
+    [progressBarSourceData]="progressBarSourceData"
+    [chartType]="chartType"
+    [sumField]="sumField"
+    [inline]="false"
+    [displayAverageLabel]="true"
+    [datasetMeta]="[
+        { prefix: 'official', color: '#89bf42', label: translateService.instant('REPORT.OFFICIAL') },
+        { prefix: 'private', color: '#417a97', label: translateService.instant('REPORT.PRIVATE') }
+    ]"
+    (switchToObject)="switchToObject.emit($event)">
+</app-progressbar-set>

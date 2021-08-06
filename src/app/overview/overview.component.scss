@@ -1,0 +1,34 @@
+@import 'src/variables';
+
+:host {
+    > .mat-drawer-container {
+        height: 100%;
+        > .sidenav-filter {
+            margin-top: 2.5rem;
+            width: 100%;
+        }
+        .noti-icon {
+            color: $color-yellow;
+            font-size: 1rem;
+            margin-right: 0.25rem;
+            padding-top: 0.25rem;
+        }
+        fa-icon {
+            float: right;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: $color-green;
+            background-color: $color-white;
+            border: 2px $color-green solid;
+            border-radius: 100px;
+            &.inverse {
+                color: $color-white;
+                background-color: $color-green;
+            }
+        }
+    }
+}

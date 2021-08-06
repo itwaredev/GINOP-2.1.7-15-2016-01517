@@ -1,0 +1,21 @@
+<button mat-icon-button class="add-icon" matTooltip="{{ 'ACTION.ADD' | translate }}" (click)="addContact()"><mat-icon>add</mat-icon></button>
+
+<app-smart-table #table modelName="alert.contact" [columns]="columns" [data]="contacts"
+    [selectedRowTemplate]="selectedEdit" [hideColumnSelectorElement]="true" pageType="none"></app-smart-table>
+
+<ng-template #typeCell let-row="row">
+    <fa-icon [icon]="['fas', (row.contactType === 'push' ? 'bell' : (row.contactType === 'email' ? 'envelope' : row.contactType))]"
+        title="{{ ('ALERT.CONTACT.CONTACTTYPES.' + row.contactType) | uppercase | translate }}"></fa-icon>
+</ng-template>
+
+<ng-template #deleteCell let-row="row">
+    <fa-icon [icon]="['fas', 'times']" (click)="$event.stopPropagation(); deleteContact(row);"></fa-icon>
+</ng-template>
+
+<ng-template #selectedEdit let-row="row">
+    <app-form-for-model #form [metadata]="metadata" [model]="row"></app-form-for-model>
+    <button mat-icon-button class="save" color="primary" matTooltip="{{ 'ACTION.SAVE' | translate }}" (click)="saveContact(row)" [disabled]="!form.myForm.valid">
+        <mat-icon>save</mat-icon>
+        {{ 'ACTION.SAVE' | translate }}
+    </button>
+</ng-template>

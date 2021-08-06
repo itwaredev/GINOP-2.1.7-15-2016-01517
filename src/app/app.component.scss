@@ -1,0 +1,84 @@
+@import 'src/variables';
+
+:host {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    .header {
+        background-color: $color-blue;
+        padding: 0.75rem;
+        width: 100%;
+        display: flex;
+        fa-icon {
+            color: $color-white;
+            font-size: 1.3125rem;
+            cursor: pointer;
+        }
+        .header-item {
+            color: $color-white;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .header-title {
+            color: $color-white;
+            font-size: 1.0625rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+        }
+        .search {
+            text-align: right;
+        }
+        .header-item, .header-bars, .search {
+            flex: 1;
+        }
+    }
+    .mat-drawer-container {
+        height: 100%;
+        .sidenav-menu {
+            padding: 0 0.5rem 1rem 0;
+            width: 200px;
+            color: $color-white;
+            background-color: $color-blue;
+            .sidenav-item {
+                padding: 1rem 0;
+                border-bottom: 1px solid $color-gray;
+                text-decoration: none;
+                padding-left: 1rem;
+                font-family: "Roboto", "Helvetica Neue", sans-serif;
+                cursor: pointer;
+                .home-btn, .notification {
+                    color: $color-green;
+                    font-size: 1.3125rem;
+                }
+                &:hover:not(.disabled) {
+                    color: $color-green;
+                    border-bottom: 1px solid $color-green;
+                }
+                &.logout {
+                    border-bottom: 0;
+                    padding-bottom: 0;
+                    margin-top: auto;
+                    &:hover {
+                        border-bottom: 0;
+                    }
+                    fa-icon {
+                        margin-right: 0.5rem;
+                        font-size: 1.3125rem;
+                    }
+                }
+            }
+        }
+        .content {
+            height: 100%;
+            overflow: hidden;
+            &.noframe {
+                padding-top: 5px;
+                background-color: $color-white-gray;
+            }
+        }
+    }
+}

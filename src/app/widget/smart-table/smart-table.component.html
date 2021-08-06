@@ -1,0 +1,103 @@
+<div class="filter-wrapper">
+  <div class="filter-field" *ngFor="let column of columns" [style.max-width]="getColumnWidth(column)" [style.min-width]="getColumnWidth(column)">
+    <mat-form-field floatPlaceholder="never" *ngIf="column['filterable']" style="width: 100%" [class.hidden]="column['filterOptions']">
+      <input #filterField matInput attr.data-column="{{column['name']}}">
+    </mat-form-field>
+    <mat-form-field floatPlaceholder="never" *ngIf="column['filterable'] && column['filterOptions']" style="width: 100%">
+      <mat-select (selectionChange)="filterOptionSelected(column, $event)">
+        <mat-option value=""></mat-option>
+        <mat-option *ngFor="let option of column['filterOptions']" [value]="option.value">
+          {{option.label}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div *ngIf="getItemCount() === 0">
+  {{ emptyMessage }}
+</div>
+<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+  <ng-container *ngIf="statusColumn" matColumnDef="statusColumn">
+    <mat-header-cell class="statusCell" *matHeaderCellDef>
+      <span></span>
+    </mat-header-cell>
+    <mat-cell class="statusCell" *matCellDef="let item" [ngClass]="{ 'status-valid': statusColumn.checkStatus(item), 'status-invalid': !statusColumn.checkStatus(item)}">
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="checkbox">
+    <mat-header-cell *matHeaderCellDef style="max-width: 44px;">
+      <mat-checkbox #selectAllCheckbox (change)="selectAll()" [checked]="isAllSelected()"></mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" style="max-width: 44px;">
+      <mat-checkbox (change)="select(item)" [checked]="isSelected(item)" (click)="$event.stopPropagation()"></mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+
+  <ng-container *ngFor="let column of columns; let i = index" matColumnDef="{{ column['name'] || column }}">
+    <div *ngIf="!this.column.statusColumn && this.columnConfigByName[column['name'] || column].sortable">
+      <mat-header-cell [style.max-width]="getColumnWidth(column)" [style.min-width]="getColumnWidth(column)" *matHeaderCellDef>
+        <span mat-sort-header style="display: inline-block">{{ column['displayName'] !== '' ? ((column['headerLabel'] || ([modelName, column['displayName'] || column['name'] || column].join('.')).toUpperCase()) | translate) : '' }}</span>
+        <span style="flex: 1"></span>
+        <div *ngIf="this.columnConfigByName[column['name'] || column].resizeable" class="resize-handle" [class.last-handle]="isLastColumn(column)" (mousedown)="startSizing(i, $event)"></div>
+      </mat-header-cell>
+    </div>
+    <div *ngIf="!this.columnConfigByName[column.name || column].sortable">
+      <mat-header-cell [style.max-width]="getColumnWidth(column)" [style.min-width]="getColumnWidth(column)" *matHeaderCellDef>
+        <span>{{ (column['headerLabel'] || ([modelName, column['displayName'] || column['name'] || column].join('.')).toUpperCase()) | translate }}</span>
+        <span style="flex: 1"></span>
+        <div *ngIf="this.columnConfigByName[column['name'] || column].resizeable" class="resize-handle" [class.last-handle]="isLastColumn(column)" (mousedown)="startSizing(i, $event)"></div>
+      </mat-header-cell>
+    </div>
+    <mat-cell *matCellDef="let item" [style.max-width]="getColumnWidth(column)" [style.min-width]="getColumnWidth(column)" [class.debug-warn]="!column.template && !column.dataFormatter && item[column['name'] || column]?.toString() === '[object Object]'">
+      <ng-template [ngTemplateOutlet]="columnTemplates[column['name'] || column]"
+                   [ngTemplateOutletContext]="{
+                     $implicit: column.enumType ? (modelName + '.' + column.name + 'S.' + (item[column.name || column] || '') | uppercase | translate) : (column.dataFormatter ? column.dataFormatter(item) : defaultFormat(item[column.name || column], column.template)),
+                     row: item,
+                     columnName: column.name || column }">
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="columnSelector">
+      <mat-header-cell *matHeaderCellDef style="min-width:25px; position: absolute; right: 0px;">
+        <button mat-icon-button *ngIf="!hideColumnSelectorElement" (click)="toggleMenu($event)"><mat-icon>more_vert</mat-icon></button>
+        <mat-card *ngIf="columnSelectorOpened" style="padding: 4px; position: absolute; right: 0px; top: 0px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-start;">
+          <mat-checkbox class="mat-menu-item" (click)="toggleColumn(column, $event)" [checked]="isDisplayed(column)" [disabled]="isLastDisplayed(column)" *ngFor="let column of selectableColumns">
+            {{ (column.headerLabel || ([modelName, column.displayName || column.name || column].join('.')).toUpperCase()) | translate }}
+          </mat-checkbox>
+        </mat-card>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let item" style="position: absolute; right: 5px;">
+          <ng-template *ngIf="actionColumn" [ngTemplateOutlet]="actionColumn.template"
+          [ngTemplateOutletContext]="{
+            $implicit: actionColumn.enumType ? (modelName + '.' + actionColumn.name + 'S.' + (item[actionColumn.name] || '') | uppercase | translate) : (actionColumn.dataFormatter ? actionColumn.dataFormatter(item) : defaultFormat(item[actionColumn.name], actionColumn.template)),
+            row: item,
+            columnName: actionColumn.name }">
+          </ng-template>
+      </mat-cell>
+    </ng-container>
+  <ng-container matColumnDef="extraRow">
+    <mat-cell *matCellDef="let item">
+      <ng-template [ngTemplateOutlet]="selectedRowTemplate"
+      [ngTemplateOutletContext]="{
+        $implicit: item,
+        row: item }">
+      </ng-template>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns" [class.hidden]="header === false" [class.no-left-padding]="statusColumn" [style.paddingRight]="getRightPadding()"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="handleRow(row)" (mouseover)="highlightRow(row)" [class.active]="selectedRow == row" [class.no-left-padding]="statusColumn" [ngClass]="statusConfig ? statusConfig.statusMap[row[statusConfig.statusProp]] : ''" [style.paddingRight]="getRightPadding()"></mat-row>
+  <mat-row *matRowDef="let row; columns: ['extraRow'];" [@rowExpand]="selectedRowTemplate && row == selectedRow ? 'expanded' : 'collapsed'" [style.paddingRight]="getRightPadding()"></mat-row>
+</mat-table>
+<mat-paginator #paginator [style.display]="getItemCount() <= pageSize || pageType === 'none' ? 'none' : 'block'"
+  [length]="getItemCount()"
+  [pageIndex]="page"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+
+<ng-template #defaultCellTmpl let-column>
+  {{ column }}
+</ng-template>

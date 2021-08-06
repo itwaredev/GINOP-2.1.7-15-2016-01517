@@ -1,0 +1,52 @@
+<span
+    (click)="fromDatePicker.opened ? fromDatePicker.close() : fromDatePicker.open()"
+    class="date-from"
+    [class.active]="noDefaultInterval()">
+    <input
+        class="date"
+        name="fromDate"
+        [matDatepicker]="fromDatePicker"
+        type="input"
+        [ngModel]="dateModel.fromDate"
+        [max]="dateModel.yesterdayDate"
+        (ngModelChange)="selectDate($event, true)"
+        readonly/>
+    <mat-datepicker #fromDatePicker></mat-datepicker>
+</span>
+-
+<span
+    (click)="toDatePicker.opened ? toDatePicker.close() : toDatePicker.open()"
+    [class.active]="noDefaultInterval()">
+    <input
+        class="date"
+        name="toDate"
+        [matDatepicker]="toDatePicker"
+        type="input"
+        [ngModel]="toDateToDisplay"
+        [max]="dateModel.yesterdayDate"
+        (ngModelChange)="selectDate($event, false)"
+        readonly/>
+    <mat-datepicker #toDatePicker></mat-datepicker>
+</span>
+<fa-icon (click)="onPushArrows(true)"
+    icon="angle-double-left">
+</fa-icon>
+<span
+    [class.active]="dateModel.selectedOffset === intervalType.DAY"
+    (click)="onPushIntervalButtons(intervalType.DAY)"
+    class="interval">{{ 'STATISTICS.INTERVAL.DAY' | translate }}
+</span>
+<span
+    [class.active]="dateModel.selectedOffset === intervalType.WEEK"
+    (click)="onPushIntervalButtons(intervalType.WEEK)"
+    class="interval">{{ 'STATISTICS.INTERVAL.WEEK' | translate}}
+</span>
+<span
+    [class.active]="dateModel.selectedOffset === intervalType.MONTH"
+    (click)="onPushIntervalButtons(intervalType.MONTH)"
+    class="interval">{{ 'STATISTICS.INTERVAL.MONTH' | translate}}
+</span>
+<fa-icon (click)="onPushArrows(false)"
+    icon="angle-double-right"
+    [class.disabled]="dateModel.yesterdayDate.getTime() < dateModel.toDate.getTime()">
+</fa-icon>

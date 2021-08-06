@@ -1,0 +1,107 @@
+.mat-header-row {
+  padding-left: 24px;
+  padding-right: 24px;
+  position: relative;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome and Opera */
+}
+
+.mat-form-field {
+  line-height: 2;
+}
+
+.mat-header-row mat-header-cell:first-child {
+  padding-left: 0;
+}
+
+.mat-header-row mat-header-cell:last-child {
+  padding-right: 0;
+}
+
+.mat-row mat-cell:first-child {
+  padding-left: 0;
+}
+
+.mat-row {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.resize-handle {
+  margin-right: 8px;
+  cursor: col-resize;
+  display: none;
+  float: right;
+  right: 0;
+  width: 2px;
+  height: 14px;
+  background-color: rgba(0,0,0,0);
+}
+
+.mat-header-row:hover .resize-handle {
+  display: block;
+  background-color: rgba(0,0,0,.12);
+  transition: background-color 0.2s;
+}
+
+.mat-header-row:hover .resize-handle.last-handle {
+  display: none;
+}
+
+.debug-warn {
+  border: 2px solid red;
+}
+
+.statusCell {
+  min-width: 10px;
+  max-width: 10px;
+  margin-right: 14px;
+}
+
+mat-cell.status-valid {
+  background-color: #298069;
+}
+
+mat-cell.status-invalid {
+  background-color: #ef5350;
+}
+
+
+mat-row.no-left-padding, mat-header-row.no-left-padding {
+  padding-left: 0;
+}
+
+.rowWidthStatusPadding {
+  padding-left: 0;
+}
+
+mat-row mat-cell, mat-header-row mat-header-cell {
+  word-break: break-word;
+}
+
+export-button {
+	margin: 8px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.filter-wrapper {
+  padding-left: 24px;
+  padding-right: 40px;
+  display: flex;
+}
+
+.filter-field {
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.ng-trigger-rowExpand {
+  overflow: hidden;
+}

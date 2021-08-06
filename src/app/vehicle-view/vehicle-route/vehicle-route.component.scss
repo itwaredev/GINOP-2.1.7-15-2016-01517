@@ -1,0 +1,142 @@
+@import 'src/variables';
+
+.calendar-container {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    .calendar {
+        z-index: 500;
+        width: 12rem;
+        background-color: rgba($color-white,0.64);
+        border-radius: 0 0 20% 20% / 0 0 50% 50%;
+        padding: 0.75rem 0.5rem;
+        display: flex;
+        justify-content: center;
+        input {
+            width: 7rem;
+            background: unset;
+            border: unset;
+            line-height: 2rem;
+            font-size: 1.0625rem;
+        }
+        .icon-calendar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $color-green;
+            color: $color-white;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            border-radius: 100px;
+        }
+    }
+}
+
+.history-route {
+    background-color: $color-white-gray;
+    padding: 1rem 0.5rem;
+    bottom: 0;
+    overflow: auto;
+    border-top: 3px solid $color-green;
+    .history-distance {
+        padding-left: 2rem;
+        margin: 0.75rem 0 0.75rem 2rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+        &::before {
+            content: "";
+            position: absolute;
+            height: 2px;
+            width: 1rem;
+            top: 50%;
+            left: 0;
+            background: $color-green;
+        }
+        .driver {
+            padding-left: 0.5rem;
+            flex: 1;
+        }
+        fa-icon {
+            font-size: 1.625rem;
+            padding: 0 1rem;
+            border-radius: 100px;
+        }
+    }
+    .history-detail {
+        background-color: $color-white;
+        border-radius: 100px;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .history-index {
+            font-weight: bold;
+            color: $color-green;
+            border-radius: 50%;
+            border: 2px solid $color-green;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.4375rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            &.connect-line-up {
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    height: 3rem;
+                    top: -3rem;
+                    background: $color-green;
+                    left: 1.3rem; // just because safari
+                }
+            }
+            &.connect-line-down {
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 2px;
+                    height: 3rem;
+                    bottom: -3rem;
+                    background: $color-green;
+                    left: 1.3rem; // just because safari
+                }
+            }
+        }
+    }
+    .notice {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+#handle {
+    width: 34px;
+    height: 34px;
+    background-color: $color-white-gray;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    border-radius: 50%;
+    border-style: outset;
+    border-style: inset solid outset solid;
+    border-color: $color-blue $color-green;
+    cursor: grab;
+    z-index: 500;
+    &.handle-active {
+        cursor: grabbing;
+        background-color: $color-white;
+    }
+}

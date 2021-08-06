@@ -1,0 +1,33 @@
+<mat-sidenav-container #navContainer class="overview">
+  <mat-tab-group #tabGroup [(selectedIndex)]="selectedTab" (selectedIndexChange)="vehicleFilter.close()" class="overview">
+    <mat-tab label="{{ 'FLEET_VIEW_MENU.MAP' | translate }}">
+      <app-vehicle-map [tabContainerGroup]="tabGroup" [tabIndex]="0">
+          <ng-template [ngTemplateOutlet]="filterIcon" [ngTemplateOutletContext]="{ $implicit: {} }"></ng-template>
+      </app-vehicle-map>
+    </mat-tab>
+
+    <mat-tab label="{{ 'FLEET_VIEW_MENU.VEHICLE' | translate }}">
+      <app-vehicle-list [tabContainerGroup]="tabGroup" [tabIndex]="1">
+          <ng-template [ngTemplateOutlet]="filterIcon" [ngTemplateOutletContext]="{ $implicit: {} }"></ng-template>
+      </app-vehicle-list>
+    </mat-tab>
+    
+    <mat-tab>
+      <ng-template mat-tab-label>
+          <mat-icon class="noti-icon" *ngIf="vehicleAlerts.unseenCount">notifications</mat-icon>
+          {{ vehicleAlerts.unseenCount || '' }} {{ ('FLEET_VIEW_MENU.ALERT' + (!vehicleAlerts.unseenCount ? 'S' : '')) | translate }}
+      </ng-template>
+      <app-vehicle-alerts #vehicleAlerts (unseenCountChanged)="cdr.markForCheck()" [tabContainerGroup]="tabGroup" [tabIndex]="2">
+          <ng-template [ngTemplateOutlet]="filterIcon" [ngTemplateOutletContext]="{ $implicit: {} }"></ng-template>
+      </app-vehicle-alerts>
+    </mat-tab>
+  </mat-tab-group>
+
+  <ng-template #filterIcon>
+    <fa-icon [icon]="['fas', 'filter']" [ngClass]="{'inverse': vehicleFilter.hasActiveFilter}" (click)="filter.open()"></fa-icon>
+  </ng-template>
+
+  <mat-sidenav #filter mode="over" position="end" class="sidenav-filter" (openedStart)="vehicleFilter.onOpen()">
+      <app-vehicle-filter #vehicleFilter (closeFilter)="filter.close()"></app-vehicle-filter>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -1,0 +1,25 @@
+$color-green: #89bf42;
+$color-white: #ffffff;
+$color-white-gray: #e2e2e2;
+$color-black: #333333;
+$color-blue: #263238;
+$color-gray: #b7bfc4;
+$color-gray-light: #aab0b6;
+$color-yellow: #fbc02d;
+$color-cyan: #00bcd4;
+$color-bg-offline: #3f545e;
+$color-bg-filter-vehicle: #e8e8e8;
+$color-title-field-filter: #417a97;
+$color-bg-gas-progress-empty: #d1d1d1;
+$color-bg-gas-progress-full: #2db959;
+$color-bg-upper-slide-selector: #f0f0f0;
+$color-notification-ready: #ffc200;
+$color-notification-old: #b4b9bc;
+
+@mixin component {
+    height: 100%;
+    padding: 1rem 0.75rem 0 0.75rem;
+    display: block;
+    background-color: $color-bg-filter-vehicle;
+    overflow: auto;
+}

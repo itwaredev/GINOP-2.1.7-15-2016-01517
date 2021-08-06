@@ -1,0 +1,23 @@
+@import 'src/variables';
+
+:host {
+    max-width: 375px;
+    color: $color-white;
+    margin: auto;
+    display: block;
+    padding: 1rem;
+    img {
+        padding-top: 5rem;
+        width: 100%;
+    }
+    h1 {
+        margin: 1rem 0 1rem 0;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .mat-button {
+        width: 100%;
+        font-size: 1.5rem;
+        border-radius: 100px;
+    }
+}

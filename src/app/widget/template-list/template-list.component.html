@@ -1,0 +1,9 @@
+<div class="title">
+    <span class="node" [ngClass]="nodeClass">{{ (list || []).length }}</span>
+    <span class="status">{{ nodeTitle | translate }}</span>
+</div>
+<div *ngFor="let item of (list || [])">
+    <ng-template [ngTemplateOutlet]="elementTmpl"
+    [ngTemplateOutletContext]="{ $implicit: item, item: item }">
+    </ng-template>
+</div>

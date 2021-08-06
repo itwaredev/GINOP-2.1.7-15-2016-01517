@@ -1,0 +1,13 @@
+<div class="top-info">
+    <div class="info">
+        <span class="node online">{{ (shownVehicleData | filterArray:{propName: 'ignition', contained: [1]}).length }}</span>
+        <span>{{ 'ACTION.MOVING' | translate }}</span>
+        <span class="node offline">{{ (shownVehicleData | filterArray:{propName: 'ignition', contained: [null, undefined, 0]}).length }}</span>
+        <span>{{ 'ACTION.STANDBY' | translate }}</span>
+    </div>
+    <div>
+        <fa-icon [icon]="['fas', 'sticky-note']" [ngClass]="{'inverse':showPopup}" (click)="togglePopups()"></fa-icon>
+        <ng-content></ng-content>
+    </div>
+</div>
+<div id="map" #map></div>

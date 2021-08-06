@@ -1,0 +1,14 @@
+<div class="main-bg" [hidden]="!chartSourceData || !chartSourceData.length">
+    <canvas #chart></canvas>
+    <div *ngIf="chartTypes.length > 1" (click)="chartToggle()" [style.width]="yMaxLen + 'px'"></div>
+</div>
+<app-progressbar-set
+    *ngIf="progressBarSourceData"
+    [progressBarSourceData]="progressBarSourceData"
+    [sumField]="sumField"
+    [chartType]="chartType"
+    [datasetMeta]="datasetMeta"
+    [displayAverageLabel]="false"
+    (switchToObject)="switchToObject.emit($event)">
+</app-progressbar-set>
+<mat-card *ngIf="!progressBarSourceData && (!chartSourceData || !chartSourceData.length)">{{ 'REPORT.NO_INTERVAL_DATA' | translate }}</mat-card>

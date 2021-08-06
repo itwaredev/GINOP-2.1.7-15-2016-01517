@@ -1,0 +1,37 @@
+<mat-tab-group id="statistics" #tabGroup class="statistic" [(selectedIndex)]="selectedIndex">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="tab-icon" matTooltip="{{ 'REPORT.FLEET_STAT' | translate }}">
+                <fa-icon icon="car-alt" class="left-element"></fa-icon>
+                <fa-icon icon="car-alt" class="top-element"></fa-icon>
+                <fa-icon icon="car-alt" class="right-element"></fa-icon>
+            </div>
+        </ng-template>
+        <app-vehicle-reports [hideSelector]="true" [tabContainerGroup]="tabGroup" [tabIndex]="0" (vehicleSelected)="selectVehicle($event)"></app-vehicle-reports>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <fa-icon icon="car-alt" class="tab-icon single" matTooltip="{{ 'REPORT.VEHICLE_STAT' | translate }}"></fa-icon>
+        </ng-template>
+        <app-vehicle-reports #vehicleReport [tabContainerGroup]="tabGroup" [tabIndex]="1"></app-vehicle-reports>
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <div class="tab-icon" matTooltip="{{ 'REPORT.DRIVER_STAT' | translate }}">
+                <fa-icon icon="user" class="left-element"></fa-icon>
+                <fa-icon icon="user" class="top-element"></fa-icon>
+                <fa-icon icon="user" class="right-element"></fa-icon>
+            </div>
+        </ng-template>
+        <app-drivers-stat #driversReport [tabContainerGroup]="tabGroup" [tabIndex]="2"></app-drivers-stat>
+    </mat-tab>
+
+    <!-- <mat-tab disabled>
+        <ng-template mat-tab-label>
+            <fa-icon icon="user" class="tab-icon single" (click)="showToaster()"></fa-icon>
+        </ng-template>
+        Content
+    </mat-tab> -->
+</mat-tab-group>

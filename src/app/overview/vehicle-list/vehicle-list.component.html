@@ -1,0 +1,31 @@
+<ng-content></ng-content>
+<app-template-list [list]="vehicleData | filterArray:{propName: 'ignition', contained: [1]} | sortBy:undefined:'licensePlate'"
+  nodeTitle="ACTION.MOVING" nodeClass="online" [elementTmpl]="movingListElementTmpl"></app-template-list>
+<app-template-list [list]="vehicleData | filterArray:{propName: 'ignition', contained: [null, undefined, 0]} | sortBy:undefined:'licensePlate'"
+  nodeTitle="ACTION.STANDBY" nodeClass="offline" [elementTmpl]="standbyListElementTmpl"></app-template-list>
+
+<ng-template #movingListElementTmpl let-item>
+  <div class="vehicle-box" (click)="moveToVehicle(item.vehicleId)">
+    <span class="license">{{ item.licensePlate }}</span>
+    <span class="name">{{ item.name }}</span>
+    <span class="driver">{{ item.driverName }}</span>
+    <div class="alert-container">
+      <span class="today alert" *ngFor="let key of keys(vehicleAlertData[item.vehicleId] || {})">
+        <fa-icon [icon]="['fas', key]" [rotate]="key === GEOFENCING_ALERT_ICON? 270 : 0"></fa-icon>{{ vehicleAlertData[item.vehicleId][key].length }}
+      </span>
+    </div>
+    <div class="vehicle-speed">
+      <span class="speed">{{ item.speed }}</span>
+      {{ item.speed_units }}
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #standbyListElementTmpl let-item>
+  <div class="vehicle-box standby" (click)="moveToVehicle(item.vehicleId)">
+      <span class="license">{{ item.licensePlate }}</span>
+      <span class="name">{{ item.name }}</span>
+      <span class="address">{{ item.address }}</span>
+  </div>
+</ng-template>
+  

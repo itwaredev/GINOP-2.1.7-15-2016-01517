@@ -1,0 +1,4 @@
+<img src="assets/img/brand-name.png" *ngIf="!onfocus || !shouldHide" />
+<h1>{{ 'LOGIN.TITLE' | translate }}</h1>
+<app-form-for-model #form [metadata]="metadata" [model]="credentials" (validationChanged)="validity = $event" (submit)="login()" (focus)="formFocus($event)" (blur)="formBlur($event)"></app-form-for-model>
+<button mat-button #loginbtn [disabled]="!validity" (click)="login()">{{'LOGIN.LOGIN_BTN' | translate}}</button>

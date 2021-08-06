@@ -1,0 +1,12 @@
+@import 'src/variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    mat-tab-group {
+        fa-icon, mat-icon {
+            font-size: 1.1875rem;
+        }
+    }
+}

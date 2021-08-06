@@ -1,0 +1,283 @@
+@import '~@angular/material/theming';
+@import 'src/variables';
+@include mat-core();
+
+$posiware-green: (
+  50 : #e1edea,
+  100 : #b3d2ca,
+  200 : #81b4a7,
+  300 : #4f9683,
+  400 : #298069,
+  500 : #03694e,
+  600 : #036147,
+  700 : #02563d,
+  800 : #024c35,
+  900 : #013b25,
+  A100 : #71ffbd,
+  A200 : #3effa5,
+  A400 : #0bff8e,
+  A700 : #00f181,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000
+  )
+);
+
+@mixin posiware-theme($primary, $accent, $warn) {
+  $posiware-primary: mat-palette($primary);
+  $posiware-accent: mat-palette($accent);
+  $posiware-warn: mat-palette($warn);
+  $posiware-theme: mat-light-theme($posiware-primary, $posiware-accent, $posiware-warn);
+
+  @include angular-material-theme($posiware-theme);
+
+  .mat-drawer-container {
+    background-color: transparent;
+  }
+
+  .mat-tab-group.mat-primary .mat-tab-label.cdk-program-focused:not(.mat-tab-disabled) {
+    background-color: unset;
+  }
+
+  .mat-simple-snackbar-action {
+    color: white;
+    background-color: #4c5660;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12);
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 16px;
+    border-radius: 2px;
+    margin-left: 24px;
+    .mat-button:not([disabled]):not([disabled]):not([disabled]) {
+      background-color: transparent;
+    }
+  }
+  
+  .mat-button:not(.mat-calendar-period-button),
+  .mat-button[disabled][disabled][disabled] {
+    background-color: $color-green;
+    color: $color-white;
+  }
+
+  .mat-form-field:not(.mat-form-field-invalid):not(.mat-focused) {
+    .mat-form-field-label {
+      color: $color-title-field-filter;
+      line-height: 1.3em;
+    }
+    .mat-form-field-underline {
+      background-color: $color-title-field-filter;
+    }
+  }
+  app-auth .mat-form-field:not(.mat-form-field-invalid):not(.mat-focused) {
+    .mat-form-field-label {
+        color: $color-white;
+        line-height: 1.3em;
+    }
+    .mat-form-field-underline {
+        background-color: $color-white;
+    }
+  }
+
+  .mat-tab-header {
+    border-bottom: 0;
+    background-color: $color-blue;
+    .mat-tab-list {
+      width: 100%;
+      .mat-tab-labels .mat-tab-label {
+        opacity: 1;
+        flex: 1;
+        padding: 0 12px;
+        color: $color-white;
+        &.mat-tab-label-active {
+          border-bottom: 3px solid $color-green;
+          color: $color-green;
+          font-weight: bolder;
+        }
+        &.mat-tab-disabled .mat-tab-label-content {
+          opacity: 0.7;
+        }
+        .mat-badge.mat-badge-before > .mat-badge-content.mat-badge-active {
+          top: -0.4rem;
+          background-color: $color-yellow;
+        }
+      }
+    }
+    > .mat-tab-header-pagination {
+      background-color: $color-blue;
+      > .mat-tab-header-pagination-chevron {
+        border-color: $color-white;
+      }
+    }
+  }
+  app-statistic, app-vehicle-reports, app-alert {
+    .mat-tab-header {
+      background-color: $color-white-gray;
+      .mat-tab-list .mat-tab-labels .mat-tab-label {
+        color: $color-black;
+      }
+      .mat-tab-header-pagination {
+        background-color: $color-white-gray;
+      }
+    }
+  }
+  app-statistic {
+    >.mat-tab-group >.mat-tab-header .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+      border-bottom: 0;
+      .tab-icon {
+        background: $color-green;
+        color: $color-white-gray;
+      }
+    }
+  }
+
+  .mat-tab-body {
+    background: $color-white-gray;
+    .mat-tab-body-content {
+      position: relative;
+      .add-icon {
+        position: absolute;
+        top: 0.5rem;
+        right: 0;
+        z-index: 1;
+        color: $color-white;
+      }
+    }
+  }
+
+  .mat-progress-bar-buffer {
+    background-color: $color-bg-gas-progress-empty;
+  }
+  .mat-progress-bar-fill {
+    &::after {
+        background-color: $color-bg-gas-progress-full;
+    }
+  }
+
+  .mat-header-cell:not([class*=mat-column-columnSelector]) {
+    .mat-checkbox-frame {
+      border-color: white;
+    }
+  }
+  .mat-header-row {
+    background-color: mat-color($posiware-primary);
+    .mat-header-cell {
+      color: mat-color($posiware-primary, default-contrast);
+    }
+  }
+  .mat-row {
+    cursor: pointer;
+    border-bottom-color: mat-color($posiware-primary, default, 0.24);
+    &:last-child {
+      border-bottom-color: transparent;
+    }
+    &:nth-child(4n-0) {
+      background-color: mat-color($posiware-primary, 100);
+    }
+    &:nth-child(4n-2) {
+      background-color: mat-color($posiware-primary, 50);
+    }
+    &.active {
+      background-color: mat-color($posiware-primary, 200);
+    }
+    &:hover {
+      background-color: mat-color($posiware-primary, 200, 0.12);
+    }
+    &.active:hover {
+      background-color: mat-color($posiware-primary, 200, 0.6);
+    }
+    &.ng-trigger-rowExpand .mat-cell {
+      flex-direction: column;
+      padding-top: 0.5rem;
+      app-form-for-model {
+          width: 100%;
+      }
+    }
+  }
+
+  .table .head {
+    background-color: mat-color($posiware-primary, default);
+    color: mat-color($posiware-primary, default-contrast)
+  }
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    height: 16px;
+    width: 16px;
+    border: 1px solid $color-bg-offline;
+    border-radius: 2px;
+    &:checked {
+        background: $color-green;
+        border: none;
+    }
+    &:hover {
+        filter: brightness(90%);
+    }
+    &:disabled {
+        background: $color-bg-filter-vehicle;
+        opacity: 0.6;
+        pointer-events: none;
+    }
+    &:after {
+        content: '';
+        position: relative;
+        left: 40%;
+        top: 15%;
+        width: 20%;
+        height: 50%;
+        border: solid $color-white;
+        border-width: 0 1px 1px 0;
+        transform: rotate(45deg);
+        display: none;
+    }
+    &:checked:after {
+        display: block;
+    }
+    &:disabled:after {
+        border-color: $color-gray-light;
+    }
+  }
+
+  #app-loading .spinner .path {
+    stroke: mat-color($posiware-primary, 200);
+  }
+    
+  .online {
+    color: $color-white;
+    background-color: $color-green;
+  }
+  .offline {
+    color: $color-white;
+    background-color: $color-bg-offline;
+  }
+  .today {
+    color: $color-black;
+    background-color: $color-notification-ready;
+  }
+  .old {
+    background-color: $color-notification-old;
+  }
+  .private {
+    background-color: red;
+  }
+}
+
+.posiware-green-theme {
+  @include posiware-theme($posiware-green, $posiware-green, $mat-red);
+}

@@ -1,0 +1,90 @@
+@import 'src/variables';
+
+:host {
+    overflow: auto;
+    .average-container {
+        .average {
+            min-width: min-content;
+            display: inline-block;
+            position: relative;
+            background-color: $color-cyan;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0px 2px #888888;
+            z-index: 2;
+            transform: translateX(-50%);
+            &::after {
+                position: absolute;
+                background-color: $color-cyan;
+                height: 1rem;
+                width: 1rem;
+                transform: translate(-50%, -50%) rotate(45deg);
+                top: 100%;
+                left: 50%;
+                box-shadow: 1px 1px #888888;
+                content: '';
+            }
+        }
+        &::before {
+            position: fixed;
+            content: '';
+            z-index: 1;
+            width: 1px;
+            height: 100%;
+            background-color: $color-cyan;
+        }
+    }
+    mat-card {
+        padding: 12px;
+        margin: 10px;
+        cursor: pointer;
+        .head-title {
+            width: 100%;
+            border-bottom: 1px #80808066 solid;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            .rank {
+                margin-left: auto;
+                border-radius: 50%;
+                color: white;
+                width: 2rem;
+                height: 2rem;
+                text-align: center;
+                padding-top: 2px;
+                font-size: 1.5rem;
+            }
+        }
+        .vehicle-status {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            .title {
+                margin-right: 0.5rem;
+                font-weight: bold;
+            }
+            .indicator-container {
+                flex: 1;
+                color: $color-white;
+                .indicator-wrapper {
+                    display: flex;
+                    height: 1.25rem;
+                    overflow: hidden;
+                    white-space: pre-wrap;
+                    border-radius: 1rem;
+                    text-align: center;
+                }
+            }
+            .sum {
+                margin-left: 1rem;
+            }
+        }
+    }
+    .no-data-card {
+      margin: 20px;
+      text-align: center;
+    }
+}

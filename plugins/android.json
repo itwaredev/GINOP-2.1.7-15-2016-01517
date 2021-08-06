@@ -1,0 +1,51 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-fabric-plugin": {
+      "FABRIC_API_KEY": "",
+      "FABRIC_API_SECRET": "",
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-androidx": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-firebase-lib": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-market": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "hu.itware.posiware"
+    }
+  },
+  "dependent_plugins": {}
+}

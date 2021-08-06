@@ -1,0 +1,24 @@
+<button mat-icon-button class="add-icon" matTooltip="{{ 'ACTION.ADD' | translate }}" (click)="addConfig()"><mat-icon>add</mat-icon></button>
+
+<app-smart-table #table modelName="alert.setup" [columns]="columns" [data]="alertConfigs" pageType="none"
+    [selectedRowTemplate]="selectedEdit" [hideColumnSelectorElement]="true" (rowActivated)="selectRow($event)"></app-smart-table>
+<mat-card class="no-config-card" 
+  *ngIf="loaded && !(alertConfigs || {length: 0}).length && !(contacts || {length: 0}).length"
+  (click)="setupClick.emit()">
+    {{ 'ALERT.SETUP.CONTACTS_FIRST' | translate }}
+    <span class="link" (click)="setupClick.emit()">{{'ACTION.CLICK_HERE' | translate}}</span>
+</mat-card>
+
+<ng-template #deleteCell let-row="row">
+    <fa-icon [icon]="['fas', 'times']" (click)="$event.stopPropagation(); deleteConfig(row);"></fa-icon>
+</ng-template>
+
+<ng-template #selectedEdit let-row="row">
+    <app-form-for-model #formBase [metadata]="metadataBase" [model]="row" (changed)="rowChanged($event.key)"></app-form-for-model>
+    <app-form-for-model #formParams [metadata]="metadataParams" [model]="row.params"></app-form-for-model>
+    <button mat-icon-button class="save" color="primary" matTooltip="{{ 'ACTION.SAVE' | translate }}"
+        (click)="saveConfig(row)" [disabled]="!formBase.myForm.valid || !formParams.myForm.valid">
+        <mat-icon>save</mat-icon>
+        {{ 'ACTION.SAVE' | translate }}
+    </button>
+</ng-template>

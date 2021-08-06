@@ -1,0 +1,7 @@
+<span 
+    *ngFor="let vehicle of vehicleData"
+    class="upper-slide-item"
+    [ngClass]="{'active': selectedVehicleId == vehicle.id}"
+    (click)="selectVehicle(vehicle.id)">
+        {{ vehicle.licensePlate }}
+</span>

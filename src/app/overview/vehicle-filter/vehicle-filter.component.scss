@@ -1,0 +1,28 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    span {
+        font-size: 1.1875rem;
+        font-weight: bold;
+    }
+    .clear-icon {
+        float: right;
+        border-radius: 100px;
+        color: $color-white;
+        background-color: $color-green;
+        cursor: pointer;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .clear-btn {
+        width: 100%;
+        border-radius: 100px;
+        font-size: 1.3125rem;
+        text-transform: uppercase;
+    }
+}

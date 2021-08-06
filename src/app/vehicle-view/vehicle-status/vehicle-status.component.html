@@ -1,0 +1,49 @@
+<div class="vehicle-status" *ngIf="vehicleData">
+  <span class="name">{{vehicleData.name}}</span>
+  <span class="status">
+    <fa-icon class="online" [ngClass]="{'private': vehicleData.private_or_official}"
+      [icon]="vehicleData.private_or_official ? ['fa','user-secret'] : ['fa','user-tie']"></fa-icon>
+  </span>
+  <span class="driver">{{vehicleData.driverName}}</span>
+  <div class="alert-container">
+    <span class="today alert" *ngFor="let key of keys(vehicleAlertData[vehicleData.vehicleId] || {})">
+      <fa-icon [icon]="['fas', key]" [rotate]="key === GEOFENCING_ALERT_ICON? 270 : 0"></fa-icon>
+      {{ vehicleAlertData[vehicleData.vehicleId][key].length }}
+    </span>
+  </div>
+  <div class="vehicle-speed">
+    <span class="speed">{{vehicleData.speed != null ? vehicleData.speed : '-'}}</span>
+    {{vehicleData.speed_units || ("VEHICLE_DATA.SPEED_UNIT" | translate)}}
+  </div>
+  <div class="gas-progress">
+    <ng-container *ngIf="vehicleData.fuel_level; else fuelPercent">
+      <div class="gas-index">
+        <fa-icon icon="gas-pump" class="gas-icon"></fa-icon>
+        <span>{{vehicleData.fuel_level}}{{vehicleData.fuel_level_units}}</span>
+      </div>
+      <mat-progress-bar [value]="vehicle.fuelCapacityNumber ?
+        vehicleData.fuel_level *100 / vehicle.fuelCapacityNumber:
+        vehicleData.fuel_level_percent_can || vehicleData.fuel_level_percent"></mat-progress-bar>
+    </ng-container>
+  </div>
+  <div class="gas-record">
+    {{"VEHICLE_DATA.LAST_UPDATE" | translate}}: <span>{{vehicleData.gpstime | safedate}}</span>
+  </div>
+</div>
+<div id="status-map" #statusMap></div>
+<div class="bottom-overlay" *ngIf="vehicleData">
+  <p>{{"VEHICLE_DATA.RPM" | translate}}: <strong>{{vehicleData.engine_rpm || vehicleData.rpm || '-'}}
+      {{vehicleData.engine_rpm_units || vehicleData.rpm_units}}</strong></p>
+  <p>{{"VEHICLE_DATA.ACCELERATOR_POS" | translate}}:
+    <strong>{{vehicleData.accelerator_pedal_pos || '-'}}{{vehicleData.accelerator_pedal_pos_units}}</strong></p>
+  <p>{{"VEHICLE_DATA.ODOMETER" | translate}}:
+    <strong>{{vehicleData.odometer ? (vehicleData.odometer / 1000).toFixed(1) : '-'}} km</strong></p>
+</div>
+
+<ng-template #fuelPercent>
+  <div class="gas-index">
+    <fa-icon icon="gas-pump" class="gas-icon"></fa-icon>
+    <span>{{vehicleData.fuel_level_percent_can || vehicleData.fuel_level_percent}}{{vehicleData.fuel_level_percent_can_units || vehicleData.fuel_level_percent_units}}</span>
+  </div>
+  <mat-progress-bar [value]="vehicleData.fuel_level_percent_can || vehicleData.fuel_level_percent"></mat-progress-bar>
+</ng-template>

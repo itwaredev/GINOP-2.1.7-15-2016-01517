@@ -1,0 +1,7 @@
+<div id="modem-report">
+    <app-form-for-model #form [metadata]="metadata" [model]="model"></app-form-for-model>
+    <button mat-button class="filter" (click)="filter()">{{'TOOLBAR.FILTER' | translate}}</button>
+    <button mat-button class="export" (click)="export()">{{'TOOLBAR.EXPORT' | translate}}</button>
+</div>
+<app-page-scroll-table [style.display]="totalsize == 0 ? 'none' : ''" [tableConfig]="tableConfig" [supplier]="getBatch"></app-page-scroll-table>
+<p *ngIf="totalsize == 0">{{'TABLE.NODATA' | translate}}</p>

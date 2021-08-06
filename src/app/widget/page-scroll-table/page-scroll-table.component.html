@@ -1,0 +1,43 @@
+<table *ngIf="tableConfig.head.sticky" class="table {{tableConfig.class}}" [ngStyle]="tableConfig.style">
+  <tr class="head {{tableConfig.head.class}}" [ngStyle]="tableConfig.head.style">
+    <th *ngIf="tableConfig.body?.checkbox" class="checkbox" style="width: 40px;"></th>
+    <th *ngFor="let column of tableConfig.head.config" class="column {{column.class}}" [ngStyle]="column.style">
+      <div *ngFor="let field of column.fields" class="field">
+        <span>{{ field.title || field.name }}</span>
+        <span *ngIf="field.sortable" class="sort" 
+          [ngClass]="{'asc': sorting.field === field.name && sorting.order === 'ASC'}"
+          (click)="onSortChange(field.name)"></span>
+      </div>
+    </th>
+  </tr>
+</table>
+<cdk-virtual-scroll-viewport [itemSize]="itemSize || 50" (scrolledIndexChange)="onScroll()" [style.flex]="1">
+  <table class="table {{tableConfig.class}}" [ngStyle]="tableConfig.style">
+    <tr class="head {{tableConfig.head.class}}" [ngStyle]="tableConfig.head.style" [ngClass]="{'hidden': tableConfig.head.sticky || tableConfig.head.hidden}">
+      <th *ngIf="tableConfig.body?.checkbox" class="checkbox" style="width: 40px;"></th>
+      <th *ngFor="let column of tableConfig.head.config" class="column {{column.class}}" [ngStyle]="column.style">
+        <div *ngFor="let field of column.fields" class="field">
+          <span>{{ field.title || field.name }}</span>
+          <span *ngIf="field.sortable" class="sort" 
+            [ngClass]="{'asc': sorting.field === field.name && sorting.order === 'ASC'}"
+            (click)="onSortChange(field.name)"></span>
+        </div>
+      </th>
+    </tr>
+    <tr *cdkVirtualFor="let data of content" class="body {{tableConfig.body?.class}}" [ngStyle]="tableConfig.body?.style" (click)="onItemSelect(data)">
+      <td *ngIf="tableConfig.body?.checkbox" class="checkbox" style="width: 40px; text-align: center;">
+        <input type="checkbox" (click)="onItemCheck(data)"/>
+      </td>
+      <td *ngFor="let column of tableConfig.head.config" class="column {{column.class}}"  [ngStyle]="column.style">
+        <div *ngFor="let field of column.fields">
+          <ng-template *ngIf="field.cellTemplate" [ngTemplateOutlet]="field.cellTemplate" [ngTemplateOutletContext]="{ $implicit: data, data: data }"></ng-template>
+          <span *ngIf="!field.cellTemplate">{{ field.formatter ? field.formatter(data) : data[field.name] }}</span>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <span class="message">Loading</span>
+  </div>
+</cdk-virtual-scroll-viewport>

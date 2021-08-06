@@ -1,0 +1,28 @@
+{
+    "android": {
+        "release": {
+            "keystore": "",
+            "storePassword": "",
+            "alias": "",
+            "password" : ""
+        },
+        "debug": {
+            "keystore": "",
+            "storePassword": "",
+            "alias": "",
+            "password" : ""
+        }
+    },
+    "ios": {
+	    "release": {
+		    "buildFlag": [
+		    	"-UseModernBuildSystem=0"
+		    ]
+        },
+        "debug": {
+		    "buildFlag": [
+		    	"-UseModernBuildSystem=0"
+		    ]
+	    }
+  	}
+}

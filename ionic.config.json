@@ -1,0 +1,7 @@
+{
+  "name": "posiware-mobile-ui",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,170 @@
+stages:
+  - build
+  - web-deploy
+  - mobile
+
+build:
+  stage: build
+  when: always
+  except:
+    - /^v*$/
+  tags:
+    - npm
+  script:
+    - whoami
+    - module add node.10.15.0
+    - npm install
+    - ./version.sh
+    - npm run ng -- build -c test
+  artifacts:
+    paths:
+    - www/**
+    expire_in: 1 week
+
+prod_build:
+  stage: build
+  only:
+    - /^release.*$/
+  tags:
+    - npm
+  script:
+    - whoami
+    - module add node.10.15.0
+    - npm install
+    - ./version.sh
+    - npm run ng -- build --prod
+  artifacts:
+    paths:
+    - www/**
+    expire_in: 1 week
+
+web-deploy:
+  only:
+    - dev
+  stage: web-deploy
+  script:
+    - ssh dev1@192.168.0.82 rm -rf /var/www/posiware/*
+    - scp -rp www/* dev1@192.168.0.82:/var/www/posiware/
+  dependencies:
+    - build
+
+web-deploy_manual:
+  except:
+    - dev
+  stage: web-deploy
+  when: manual
+  script:
+    - ssh dev1@192.168.0.82 rm -rf /var/www/posiware/*
+    - scp -rp www/* dev1@192.168.0.82:/var/www/posiware/
+  dependencies:
+    - build
+
+mobile_manual_android:
+  only:
+    - dev
+  when: manual
+  stage: mobile
+  tags:
+    - ionic_android
+  script:
+    - module add node.10.15.0
+    - module add android-sdk
+    - npm install
+    - ./version.sh
+    - ./env_build.sh android --configuration=test
+  artifacts:
+    paths:
+      - ./platforms/android/app/build/outputs/apk/debug/app-debug.apk
+    expire_in: 1 week
+  dependencies:
+    - build
+
+mobile_manual_android_fttest:
+  only:
+    - dev
+  when: manual
+  stage: mobile
+  tags:
+    - ionic_android
+  script:
+    - module add node.10.15.0
+    - module add android-sdk
+    - npm install
+    - ./version.sh
+    - ./env_build.sh android --configuration=fttest
+  artifacts:
+    paths:
+      - ./platforms/android/app/build/outputs/apk/debug/app-debug.apk
+    expire_in: 1 week
+  dependencies:
+    - build
+
+mobile_release_android:
+  only:
+    - master
+    - /^v*$/
+    - /^release.*$/
+    - /^hotfix.*$/
+  when: manual
+  stage: mobile
+  tags:
+    - ionic_android
+  script:
+    - module add node.10.15.0
+    - module add android-sdk
+    - npm install
+    - ./version.sh
+    - ./env_build.sh android --prod --release
+  artifacts:
+    paths:
+      - ./platforms/android/app/build/outputs/apk/release/app-release.apk
+    expire_in: 1 week
+  dependencies:
+    - build
+
+mobile_manual_ios_fttest:
+  only:
+    - dev
+  when: manual
+  stage: mobile
+  tags:
+    - ionic_ios
+  script:
+    - npm install
+    - ./version.sh
+    - ./env_build.sh ios --configuration=fttest
+    - cd platforms/ios
+    - "xcodebuild -project posiware.xcodeproj -scheme posiware -destination generic/platform=iOS -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/posiware.xcarchive DEVELOPMENT_TEAM=$APPLE_DEVELOPMENT_TEAM PROVISIONING_PROFILE_SPECIFIER=$APPLE_DISTRIBUTION_PROVISIONING_PROFILE CODE_SIGN_IDENTITY=\"iPhone Distribution\" CODE_SIGN_STYLE=\"Manual\" -UseModernBuildSystem=NO"
+    - "xcodebuild -exportArchive -archivePath $PWD/build/posiware.xcarchive -exportOptionsPlist ../../platform-files/ios/distribution-exportOptions.plist -exportPath $PWD/build"
+    - "cp build/posiware.ipa ../../posiware.ipa"
+    - "\"/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool\" --upload-app -f build/posiware.ipa -u infomail@itware.hu -p $APPLE_APP_LOADER_PASSKEY"
+  artifacts:
+    paths:
+      - posiware.ipa
+  dependencies:
+    - build
+
+mobile_release_ios:
+  only:
+    - master
+    - /^v*$/
+    - /^release.*$/
+    - /^hotfix.*$/
+  when: manual
+  stage: mobile
+  tags:
+    - ionic_ios
+  script:
+    - npm install
+    - ./version.sh
+    - ./env_build.sh ios --prod --release
+    - cd platforms/ios
+    - "xcodebuild -project posiware.xcodeproj -scheme posiware -destination generic/platform=iOS -sdk iphoneos -configuration AppStoreDistribution archive -archivePath $PWD/build/posiware.xcarchive DEVELOPMENT_TEAM=$APPLE_DEVELOPMENT_TEAM PROVISIONING_PROFILE_SPECIFIER=$APPLE_DISTRIBUTION_PROVISIONING_PROFILE CODE_SIGN_IDENTITY=\"iPhone Distribution\" CODE_SIGN_STYLE=\"Manual\" -UseModernBuildSystem=NO"
+    - "xcodebuild -exportArchive -archivePath $PWD/build/posiware.xcarchive -exportOptionsPlist ../../platform-files/ios/distribution-exportOptions.plist -exportPath $PWD/build"
+    - "cp build/posiware.ipa ../../posiware.ipa"
+    - "\"/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool\" --upload-app -f build/posiware.ipa -u infomail@itware.hu -p $APPLE_APP_LOADER_PASSKEY"
+  artifacts:
+    paths:
+      - posiware.ipa
+  dependencies:
+    - build

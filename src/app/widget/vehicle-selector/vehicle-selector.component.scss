@@ -1,0 +1,19 @@
+@import 'src/variables';
+
+:host {
+    background-color: $color-bg-upper-slide-selector;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+    .upper-slide-item {
+        vertical-align: middle;
+        font-size: 0.8125rem;
+        padding: 0rem 1.25rem;
+        cursor: pointer;
+        &.active {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    }
+}

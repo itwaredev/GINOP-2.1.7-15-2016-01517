@@ -1,0 +1,22 @@
+<button mat-icon-button class="add-icon" matTooltip="{{ 'ACTION.ADD' | translate }}" (click)="addReminder()"><mat-icon>add</mat-icon></button>
+
+<app-smart-table #table modelName="alert.reminder" [columns]="columns" [data]="staticAlerts" pageType="none"
+    [selectedRowTemplate]="selectedEdit" [hideColumnSelectorElement]="true"></app-smart-table>
+<mat-card class="no-config-card" 
+  *ngIf="loaded && !(staticAlerts || {length: 0}).length && !(contacts || {length: 0}).length"
+  (click)="setupClick.emit()">
+    {{ 'ALERT.SETUP.CONTACTS_FIRST' | translate }}
+    <span class="link" (click)="setupClick.emit()">{{'ACTION.CLICK_HERE' | translate}}</span>
+</mat-card>    
+
+<ng-template #deleteCell let-row="row">
+    <fa-icon [icon]="['fas', 'times']" (click)="$event.stopPropagation(); deleteReminder(row);"></fa-icon>
+</ng-template>
+
+<ng-template #selectedEdit let-row="row">
+    <app-form-for-model #form [metadata]="metadata" [model]="row"></app-form-for-model>
+    <button mat-icon-button class="save" color="primary" matTooltip="{{ 'ACTION.SAVE' | translate }}" (click)="saveReminder(row)" [disabled]="!form.myForm.valid">
+        <mat-icon>save</mat-icon>
+        {{ 'ACTION.SAVE' | translate }}
+    </button>
+</ng-template>

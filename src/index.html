@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en" class="posiware-green-theme">
+<head>
+  <meta charset="utf-8">
+  <title>Posiware</title>
+  <base href="/">
+
+  <meta name="viewport" content="viewport-fit=contain, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png">
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <script src="assets/propagation-hammerjs.js"></script>
+  <script>
+    /** Crashlytics error report */
+    var origError = console.error;
+    console.error = function(message, ...optionalParams) {
+      if (window.fabric && window.fabric.Crashlytics) {
+        let messageObj = optionalParams[0] || (typeof message === 'object' ? message : {name: message, message: message, stack: null});
+        let skipFirstValid = false;
+        if (!messageObj.stack) {
+          try {
+            throw new Error(messageObj.message);
+          } catch(e) {
+            skipFirstValid = true;
+            messageObj.stack = e.stack;
+          }
+        }
+        let trace = (messageObj.stack || '').split('\n')
+          .map(txt => {
+            if (!txt || txt.startsWith(messageObj.name) || txt.startsWith('Error')) {
+              return null;
+            }
+            if (skipFirstValid) {
+              skipFirstValid = false;
+              return null;
+            }
+            let trimmed = txt.trim().replace(/ \[.*\]|\.prototype/, '').replace('/</', '.').replace('/<', '');
+            let first = null, declaring = 'unknown';
+            if (trimmed.startsWith('at ')) {
+              first = trimmed.substring(3).split(' (');
+              if (first.length < 2) {
+                first[1] = first[0];
+                first[0] = 'anonymous';
+              }
+              first[1] = first[1].substring(0, first[1].length - 1);
+            } else {
+              first = trimmed.split('@');
+            }
+            let second = first.length > 1 ? first.pop().split(':') : [];
+            // This is useful if you mod the fabric plugin to use declaringClass field instead of sending 'undefined'
+            let truncatedParts = first.join('@').replace(/^.*?\.\//, '').replace(/\.<$/, '').split('.');
+            if (truncatedParts.length > 1) {
+              first[0] = truncatedParts.pop();
+              declaring = truncatedParts.join('.') || declaring;
+            }
+
+            let fn = first[0];
+            let col = second.pop();
+            let line = second.pop();
+            let url = second.join(':');
+
+            return {
+              functionName: fn,
+              fileName: url,
+              lineNumber: line,
+              columnNumber: col,
+              declaringClass: declaring
+            };
+          })
+          .filter(st => st);
+        window.fabric.Crashlytics.sendNonFatalCrash(`${messageObj.name}: ${messageObj.message === messageObj.name ? '' : (messageObj.message || '').split('\n')[0]}`, trace);
+      } else {
+        // console.warn('Crashlytics is not available');
+      }
+      origError(message, ...optionalParams);
+    };
+  </script>
+</head>
+<body>
+  <div id="app-loading">
+    <svg class="spinner" viewBox="0 0 50 50">
+      <circle class="path" cx="25" cy="25" r="20"></circle>
+    </svg>
+  </div>
+  <app-root></app-root>
+</body>
+</html>

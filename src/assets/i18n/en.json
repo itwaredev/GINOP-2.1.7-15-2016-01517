@@ -1,0 +1,255 @@
+{
+  "LANGUAGES": {
+    "EN": "English",
+    "HU": "Hungarian"
+  },
+  "TOOLBAR": {
+    "LOGOUT": "Logout",
+    "FILTER": "Filter",
+    "EXPORT": "Export"
+  },
+  "TABLE": {
+    "ITEMS": "",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous",
+    "RANGE": "{first} - {last} of {length} item",
+    "NODATA": "No data could be found"
+  },
+  "MENU": {
+    "MAIN": "Landing page",
+    "LOGIN": "Login",
+    "SETTINGS": "Settings",
+    "IMPRESSUM": "Impressum",
+    "OVERVIEW": "Overview",
+    "VEHICLEVIEW": "Vehicle View",
+    "VEHICLE_STATUS": "Status",
+    "VEHICLE_ROUTES": "Routes",
+    "VEHICLE_ALERTS": "Alerts",
+    "VEHICLE_REPORTS": "Statistics",
+    "STATISTIC": "Statistics",
+    "ALERT": "Alerts"
+  },
+  "MESSAGES": {
+    "OK": "OK",
+    "ERROR": "Error",
+    "BAD_CREDENTIALS": "Invalid username or password",
+    "UNKNOWN": "Unknown error",
+    "SERVICE_NOT_AVAILABLE": "Service is not available. Check your connection or try again later.",
+    "UNAVAILABLE_FUNCTION": "This function is not available at the moment.",
+    "MINIMUM_CLIENT_VERSION": "Update your application to use this service!"
+  },
+  "LOGIN": {
+    "TITLE": "Fleet Management",
+    "CUSTOMERNAME": "Customer name",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "LOGIN_BTN": "Login"
+  },
+  "FLEET_VIEW_MENU": {
+    "MAP": "Map",
+    "VEHICLE": "Vehicles",
+    "ALERT": "alerts",
+    "ALERTS": "Alerts",
+    "FLEET": "Fleet"
+  },
+  "ACTION": {
+    "MOVING": "Moving",
+    "STANDBY": "Standby",
+    "FILTER": "Filter",
+    "CAN_GO": "It can go",
+    "CONFIRMATION_NOTICE": "Are you sure?",
+    "CONFIRMATION_DELETE": "Are you sure to DELETE?",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "YES": "Yes",
+    "CANCEL": "Cancel",
+    "DELETE": "Delete",
+    "CLICK_HERE": "Click here..."
+  },
+  "SIDENAV_ITEMS": {
+    "STATISTIC": "Statistics",
+    "ALERT": "Alerts",
+    "SETTINGS": "Settings",
+    "HELP": "Help",
+    "IMPRINT": "Impressum",
+    "NEWS": "News"
+  },
+  "FILTER_VEHICLE": {
+    "TITLE": "Filtering Vehicles",
+    "LICENSEPLATE": "License Plate",
+    "PERIOD": "Period",
+    "DRIVERNAME": "Driver",
+    "GROUP": "Group",
+    "CLEAR_FILTER": "Clear",
+    "DRIVER": "Driver",
+    "ALARM_TYPE": "Alarms type",
+    "CLOSE": "Go",
+    "DATE": "Date"
+  },
+  "VEHICLE_DATA": {
+    "LAST_UPDATE": "Last update",
+    "RPM": "Engine RPM",
+    "ACCELERATOR_POS": "Accelerator pedal position",
+    "ODOMETER": "Odometer",
+    "STATUS": "Status",
+    "OFFICIAL": "Official",
+    "PRIVATE": "Private",
+    "NO_DATA": "The vehicle haven't sent any data yet",
+    "NO_MOVE_YET": "The vehicle haven't moved yet",
+    "NO_STOP_WITHIN_PERIOD": "The vehicle haven't stopped within the choosen period",
+    "NO_DATA_AVAILABLE": "The vehicle haven't stopped today",
+    "SPEED_UNIT": "km/h"
+  },
+  "ALERT": {
+    "TODAY_ALERT": "Alert today",
+    "OLD_ALERT": "Older alert",
+    "TYPE": {
+      "RULE_ALERT": "Rule violation",
+      "GEOFENCING_ALERT": "Geofencing",
+      "STATIC_ALERT": "Reminder"
+    },
+    "ALERTS": "Alerts",
+    "REMINDERS": "Reminders",
+    "CONTACTS": "Contacts",
+    "CONTACT": {
+      "CONTACT": "Contact",
+      "CONTACTTYPE": "Contact type",
+      "CONTACTTYPES": {
+        "SMS": "SMS",
+        "PUSH": "Mobilapp",
+        "EMAIL": "Email"
+      }
+    },
+    "SETUP": {
+      "CONTACT": "Contact",
+      "VEHICLES": "Vehicles",
+      "TYPE": "Type",
+      "ALERTMESSAGE": "Message",
+      "MAXODOMETER": "Max odometer",
+      "MAXSPEED": "Max speed",
+      "MAXRPM": "Max RPM",
+      "CONTACTS_FIRST": "You might want to set up your alert contacts first."
+    },
+    "REMINDER": {
+      "CONTACT": "Contact",
+      "DATE": "Reminder date",
+      "MESSAGE": "Message"
+    }
+  },
+  "SETTINGS": {
+    "GENERAL": "General",
+    "VEHICLE_DATA_REFRESH_INTERVAL": "Refresh interval",
+    "VEHICLE_DATA_REFRESH_INTERVALS": {
+      "30000": "30 sec",
+      "60000": "1 min",
+      "120000": "2 min",
+      "300000": "5 min"
+    },
+    "MAP_SHOWN_DETAILS": "Map details",
+    "MAP_SHOWN_DETAILSS": {
+      "LICENSEPLATE": "License plate",
+      "DRIVERNAME": "Driver name",
+      "VEHICLENAME": "Vehicle name"
+    },
+    "WORKING_TIMEZONE": "Timezone",
+    "WORKING_DAYS": "Working hours",
+    "WORKING_DAYSS": {
+      "0MONDAY": "Monday",
+      "1TUESDAY": "Tuesday",
+      "2WEDNESDAY": "Wednesday",
+      "3THURSDAY": "Thursday",
+      "4FRIDAY": "Friday",
+      "5SATURDAY": "Saturday",
+      "6SUNDAY": "Sunday"
+    },
+    "WORKING_HOURS": "Working hours",
+    "WORKING_HOURSS": {
+      "MONDAY": "Monday",
+      "TUESDAY": "Tuesday",
+      "WEDNESDAY": "Wednesday",
+      "THURSDAY": "Thursday",
+      "FRIDAY": "Friday",
+      "SATURDAY": "Saturday",
+      "SUNDAY": "Sunday",
+      "START": "Start",
+      "END": "End"
+    }
+  },
+  "IMPRESSUM": {
+    "OWNER": "ITware",
+    "ADDRESS": "Address",
+    "PHONE": "Phone",
+    "WEBSITE": "Webpage",
+    "EMAIL": "E-mail",
+    "NOTICE": "{APP_NAME} software in all is property of ITware Kft"
+  },
+  "STATISTICS": {
+    "INTERVAL": {
+      "DAY": "Day",
+      "WEEK": "Week",
+      "MONTH": "Month"
+    }
+  },
+  "REPORT": {
+    "FLEET_STAT": "Fleet statistics",
+    "VEHICLE_STAT": "Vehicle statistics",
+    "DRIVER_STAT": "Driver statistics",
+    "SUM_DATA": {
+      "DISTANCE": "Driven km",
+      "AVG_CONSUMPT": "Average consumpt",
+      "MAX_SPEED": "Maximum speed"
+    },
+    "GRAPH_LABEL": {
+      "DISTANCE": "Driven km",
+      "UTILISATION": "Utilisation",
+      "ON_IGNITION": "On ignition"
+    },
+    "OFFICIAL": "official",
+    "PRIVATE": "private",
+    "NOTICE": "{APP_NAME} software in all is property of ITware Kft.",
+    "NO_DATA": "no data",
+    "HOUR": "hour(s)",
+    "MINUTES": "minutes",
+    "IGNITION": "on ignition, not moved",
+    "ON_MOVE": "on move",
+    "WORKED": "worked",
+    "NOT_WORKED": "not worked",
+    "SUM": "daily sum-total",
+    "NO_INTERVAL_DATA": "There are no data within the selected interval",
+    "NOT_WORKDAY": "No worktime set to this day(s)",
+    "AVERAGE": "Average",
+    "UNKNOWN": "Unknown"
+  },
+  "MODEM_REPORT": {
+    "id": "#",
+    "gpsTime": "Time",
+    "licensePlate": "VIN",
+    "vehicleName": "Name",
+    "longitude": "Long",
+    "latitude": "Lat",
+    "altitude": "Altitude",
+    "angle": "Angle",
+    "speedometer": "Speed",
+    "ignition": "Ign",
+    "alarm": "Alarm",
+    "private_or_official": "P/O switch",
+    "speed": "Speed (Modem)",
+    "rpm": "RPM",
+    "temperature": "Temperature",
+    "lvspeed": "Speed (LV)",
+    "accelerator_pedal_pos": "Accel. pedal",
+    "total_fuel": "Total fuel",
+    "engine_rpm": "RPM (2)",
+    "trip_odometer": "Trip odometer",
+    "fuel_level": "Fuel level",
+    "odometer": "Odometer",
+    "fuel_level_percent": "Fuel %",
+    "fuel_level_percent_can": "Fuel % (CAN)",
+    "ibutton": "Driver ID",
+    "incr_fuel": "Consumption",
+    "accel_value": "Acceleration",
+    "towing": "Towing",
+    "operator_code": "Operator code",
+    "accel_type": "Acceleration dir."    
+  }
+}

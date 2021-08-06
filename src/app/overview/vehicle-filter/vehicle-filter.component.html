@@ -1,0 +1,4 @@
+<span>{{'FILTER_VEHICLE.TITLE' | translate}}</span>
+<fa-icon [icon]="['fas', 'eraser']" class="clear-icon" (click)="clear()"></fa-icon>
+<app-form-for-model #form [metadata]="metadata" [model]="vehicleService.filters" (validationChanged)="filterChanged()"></app-form-for-model>
+<button mat-button class="clear-btn" (click)="close()">{{'FILTER_VEHICLE.CLOSE' | translate}}</button>

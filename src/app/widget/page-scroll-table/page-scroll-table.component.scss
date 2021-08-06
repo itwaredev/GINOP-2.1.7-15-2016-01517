@@ -1,0 +1,56 @@
+@import 'src/variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    .table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 100%;
+        .head {
+            border: 1px solid $color-bg-gas-progress-empty;
+            height: 48px;
+            .column {
+                font-weight: normal;
+                .field {
+                    display: flex;
+                    align-items: center;
+                    .sort {
+                        cursor: pointer;
+                        margin-left: 4.5px;
+                        border-style: solid;
+                        border-width: 6px 4.5px 0 4.5px;
+                        border-color: $color-gray-light transparent;
+                        &.asc {
+                            border-top-width: 0;
+                            border-bottom-width: 6px;
+                        }
+                    }
+                }
+                &:first-child:not(.checkbox) {
+                    padding-left: 15px;
+                }
+            }
+            &.hidden {
+                display: none;
+            }
+        }
+        .body {
+            text-align: left;
+            border-color: $color-bg-gas-progress-empty;
+            border-style: solid;
+            border-width: 0 1px 1px 1px;
+            .column {
+                text-align: left;
+                &:first-child:not(.checkbox) {
+                    padding-left: 15px;
+                }
+            }
+            &:hover {
+                border-width: 3px;
+                border-color: $color-green;
+                box-shadow: 0px 3px 10px 5px rgba(black, 0.1);
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<div *ngIf="field" [formGroup]="parentFormControl">
+  <mat-form-field>
+    <input [readonly]="disabled" matInput type="text" [required]="field.validators && field.validators.required ? field.validators.required : false"
+           matTooltip="{{ field.tooltip | translate }}" [matTooltipPosition]="field.tooltipPosition || 'above'"
+           formControlName="{{ field.name }}" [matAutocomplete]="auto" [(ngModel)]="filterValue"
+           (blur)="onBlur()">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredValues" [value]="option">
+        {{ option.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

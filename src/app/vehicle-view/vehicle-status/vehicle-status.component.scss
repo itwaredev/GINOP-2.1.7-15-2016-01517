@@ -1,0 +1,109 @@
+@import 'src/variables';
+
+.vehicle-status {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background-color: $color-white;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0,0.2);
+    border-radius: 5px;
+    margin: 0.75rem;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr 1fr 0.7fr 0.5fr;
+    .name, .status {
+        border-bottom: 1px solid $color-gray-light;
+        padding-bottom: 0.5rem;
+        grid-row: 1;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        align-self: end;
+    }
+    .name {
+        font-weight: bold;
+    }
+    .status fa-icon {
+        text-align: right;
+        font-size: 1.625rem;
+        padding: 0 1rem;
+        border-radius: 100px;
+    }
+    .driver, .alert, .alert-container {
+        padding-top: 0.5rem;
+        grid-row: 2;
+    }
+    .status, .alert {
+        text-align: right;
+    }
+    .alert {
+        text-align: right;
+        font-weight: bold;
+        font-size: 0.8125rem;
+        margin: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 100px;
+        fa-icon {
+            margin-right: 0.5rem;
+            color: $color-white;
+        }
+    }
+    .vehicle-speed {
+        text-align: center;
+        height: 4rem;
+        width: 4rem;
+        border: 1px solid $color-gray-light;
+        margin-left: 0.5rem;
+        font-size: 0.875rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        grid-row: 1 / span 2;
+        border-radius: 100px;
+        align-self: center;
+        .speed {
+            font-size: 1.5625rem;
+            font-weight: bold;
+        }
+    }
+    .gas-progress {
+        position: relative;
+        grid-column: 1 / 4;
+        .gas-index {
+            position: absolute;
+            z-index: 1;
+            padding: 0.2rem 0.75rem;
+            .gas-icon {
+                color: $color-white;
+            }
+            span {
+                font-weight: bold;
+                margin-left: 0.5rem;
+            }
+        }
+        mat-progress-bar {
+            height: 1.5rem;
+            border-radius: 100px;
+        }
+    }
+    .gas-record {
+        grid-column: 1 / 4;
+        span {
+            font-weight: bold;
+        }
+    }
+}
+.bottom-overlay {
+    background-color: rgba($color-white,0.6);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    p {
+        margin-bottom: 0.25rem;
+    }
+}
+#status-map {
+    height: 100%;
+}

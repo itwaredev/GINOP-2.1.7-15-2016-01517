@@ -1,0 +1,11 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    .chart {
+        margin-top: 15px;
+    }
+}

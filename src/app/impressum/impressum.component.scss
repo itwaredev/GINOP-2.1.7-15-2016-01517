@@ -1,0 +1,13 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    display: flex;
+    flex-direction: column;
+    span, p {
+        font-size: 0.7rem;
+        &:not(.notice) {
+            margin-top: auto;
+        }
+    }
+}

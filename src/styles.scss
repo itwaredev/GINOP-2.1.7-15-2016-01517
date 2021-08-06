@@ -1,0 +1,195 @@
+@import 'src/theme';
+
+/** tags */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  &:focus {
+    outline: none;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-image: url('/assets/img/bg-login.jpg');
+  background-size: 100% 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+/** display */
+
+[disabled], .disabled {
+  opacity: 0.7;
+}
+
+input {
+  background: none;
+}
+
+/** fix */
+
+mat-tab-group {
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+}
+
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+}
+
+.mat-tab-list .mat-ink-bar {
+  height: 0px;
+}
+
+.mat-select-panel {
+  min-width: 100% !important;
+}
+
+.overview .mat-drawer-backdrop {
+  margin-top: 2.5rem;
+}
+
+app-root >.mat-drawer-container .mat-drawer-backdrop {
+  width: 200px;
+}
+
+.sidenav-menu .mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+// for mobile safari
+.mat-input-element:disabled {
+  opacity: 1;
+}
+
+/** util */
+
+.node {
+  text-align: center;
+  border-radius: 100px;
+  min-width: 2.2rem;
+  padding: 0.2rem 0;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.toaster-pos {
+  bottom: 5vh;
+}
+
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.beta:after{
+  content:"new";
+  margin-left: 0.2rem;
+  color: $color-notification-ready;
+  font-size: 80%;
+  mix-blend-mode: difference;
+  vertical-align: super;
+}
+
+#app-loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .spinner {
+    animation: spin 2s linear infinite;
+    width: 110px;
+    height: 110px;
+    .path {
+      stroke: green;
+      stroke-width: 10%;
+      fill: transparent;
+			animation: dash 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/** google maps */
+/* The location pointed to by the popup tip. */
+.popup-tip-anchor {
+  height: 0;
+  position: absolute;
+  /* The max width of the info window. */
+  width: 200px;
+}
+/* The bubble is anchored above the tip. */
+.popup-bubble-anchor {
+  position: absolute;
+  width: 100%;
+  bottom: /* TIP_HEIGHT= */ 14px; // move tip higher than the center of the circle
+  left: 0;
+}
+/* Draw the tip. */
+.popup-bubble-anchor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Center the tip horizontally. */
+  transform: translate(-50%, 0);
+  /* The tip is a https://css-tricks.com/snippets/css/css-triangle/ */
+  width: 0;
+  height: 0;
+  /* The tip is 8px high, and 12px wide. */
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: /* TIP_HEIGHT= */ 8px solid white;
+}
+/* The popup bubble itself. */
+.popup-bubble-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -100%);
+  /* Style the info window. */
+  background-color: white;
+  padding: 6px;
+  border-radius: 3px;
+  font-family: sans-serif;
+  overflow-y: auto;
+  max-height: 60px;
+  box-shadow: 0px 2px 10px 1px rgba(0,0,0,0.5);
+}

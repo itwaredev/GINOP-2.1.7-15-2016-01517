@@ -1,0 +1,27 @@
+<div class="average-container" *ngIf="displayAverageLabel && clonedProgressBarSourceData.length > 1"
+    [ngStyle]="{'margin-left':'calc((100% - ' + (44 + maxSumWidth) + 'px - 1rem) * ' + averageLeft + ' + 22px)',
+                'max-width':'calc(((100% - ' + (44 + maxSumWidth) + 'px - 1rem) * ' + averageLeft + ' + 22px) * 2)'}">
+    <span class="average">{{ 'REPORT.AVERAGE' | translate }}: {{ average.toFixed(1) }} {{ 'REPORT.HOUR' | translate }}</span>
+</div>
+<mat-card *ngFor="let memberData of (clonedProgressBarSourceData || [])" (click)="switchToObject.emit(memberData.id)">
+    <div *ngIf="!inline" class="head-title">
+        {{ memberData.identifierName || ('REPORT.UNKNOWN' | translate) }}
+        <span class="rank" [style.background-color]="getRankBgColor(memberData.driverPoints)">{{ memberData.driverPoints }}</span>
+    </div>
+    <div class="vehicle-status">
+        <span class="title" *ngIf="inline" [style.width]="maxLicenseWidth + 'px'">{{ memberData.identifierName || ('REPORT.UNKNOWN' | translate) }}</span>
+        <div class="indicator-container">
+            <span class="indicator-wrapper" [style.width]="memberData[sumField + 'Percentage'] + '%'">
+                <span *ngFor="let dsm of datasetMeta"
+                    [style.width]="memberData[dsm.prefix + chartType.fieldSuffix + 'Percentage'] + '%'"
+                    [style.backgroundColor]="dsm.color">
+                    {{ chartType.valueFix(memberData[dsm.prefix + chartType.fieldSuffix + 'Percentage'] || 0) + '%' }}
+                </span>
+            </span>
+        </div>
+        <span class="sum" [style.width]="maxSumWidth + 'px'">
+            {{ chartType.valueFix(memberData[sumField]) + chartType.unit }}
+        </span>
+    </div>
+</mat-card>
+<mat-card *ngIf="!clonedProgressBarSourceData || !clonedProgressBarSourceData.length" class="no-data-card">{{ 'REPORT.NO_INTERVAL_DATA' | translate }}</mat-card>

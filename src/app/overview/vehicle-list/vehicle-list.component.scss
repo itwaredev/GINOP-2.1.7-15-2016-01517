@@ -1,0 +1,70 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    .vehicle-box {
+        background-color: $color-white;
+        border-radius: 3px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0,0.2);
+        margin-bottom: 0.75rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        &:not(.standby) {
+            grid-template-rows: 1fr 1fr;
+        }
+        .name, .license {
+            border-bottom: 1px solid $color-gray-light;
+            padding-bottom: 0.5rem;
+            grid-row: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .name {
+            text-align: right;
+            font-size: 0.8125rem;
+        }
+        .license {
+            font-weight: bold;
+        }
+        .driver, .alert, .alert-container {
+            padding-top: 0.5rem;
+            font-size: 0.875rem;
+            grid-row: 2;
+        }
+        .alert {
+            text-align: right;
+            margin-left: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            font-weight: bold;
+            border-radius: 100px;
+            fa-icon {
+                color: $color-white;
+                margin-right: 0.5rem;
+            }
+        }
+        .vehicle-speed {
+            text-align: center;
+            border-radius: 100px;
+            height: 3.5rem;
+            width: 3.5rem;
+            border: 1px solid $color-gray-light;
+            font-size: 0.6875rem;
+            display: flex;
+            flex-direction: column;
+            grid-row: 1 / span 2;
+            align-self: center;
+            .speed {
+                font-size: 1.3125rem;
+                padding-top: 0.25rem;
+                font-weight: bold;
+            }
+        }
+        .address {
+            grid-row: 2;
+            grid-column: 1 / 4;
+            padding: 0.25rem 0;
+        }
+    }
+}

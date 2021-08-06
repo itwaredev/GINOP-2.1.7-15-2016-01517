@@ -1,0 +1,23 @@
+<ng-content></ng-content>
+<app-template-list id="todays-alarms" [list]="filteredTodayAlerts | sortBy:undefined:'createdDate':false:'desc'" nodeTitle="ALERT.TODAY_ALERT" nodeClass="today" [elementTmpl]="todayListElementTmpl"></app-template-list>
+<app-template-list id="past-alarms" [list]="filteredPastAlerts" nodeTitle="ALERT.OLD_ALERT" nodeClass="old" [elementTmpl]="pastListElementTmpl"></app-template-list>
+
+<ng-template #todayListElementTmpl let-item>
+  <div class="notification-box">
+    <fa-icon [icon]="['fas', item.data.icon || getAlertIcon(item.alertType)]" class="today"></fa-icon>
+    <span class="name">{{item.data.alertName || ('ALERT.TYPE.' + item.alertType) | translate}}</span>
+    <span class="license-plate">{{item.data.licensePlate}}</span>
+    <span class="driver">{{item.data.driverName || ''}}</span>
+    <span class="time">{{item.createdDate | safedate}}</span>
+  </div>
+</ng-template>
+
+<ng-template #pastListElementTmpl let-item>
+  <div class="notification-box">
+    <fa-icon [icon]="['fas', item.data.icon || getAlertIcon(item.alertType)]" class="old"></fa-icon>
+    <span class="name">{{item.data.alertName || ('ALERT.TYPE.' + item.alertType) | translate}}</span>
+    <span class="license-plate">{{item.data.licensePlate}}</span>
+    <span class="driver">{{item.data.driverName || ''}}</span>
+    <span class="time">{{item.createdDate | safedate}}</span>
+  </div>
+</ng-template>

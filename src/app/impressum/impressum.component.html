@@ -1,0 +1,16 @@
+<app-form-for-model [metadata]="metadata" [model]="impressumInfo"></app-form-for-model>
+<hr>
+<span class="notice">
+  {{ ('IMPRESSUM.NOTICE' | translate).replace('{APP_NAME}', APP_NAME) }}
+</span>
+<span *ngIf="versionService.versionInfo">
+  <p *ngIf="printAllVersion">
+    {{ versionService.versionInfo.version }} ({{ versionService.versionInfo.buildTime }}){{ versionService.versionInfo.scmInfo }}
+  </p>
+  <p *ngIf="printAllVersion && versionService.versionInfo.frontendVersion && versionService.versionInfo.frontendDate">
+    FRONTEND ({{ versionService.versionInfo.frontendDate }}){{ versionService.versionInfo.frontendVersion }}
+  </p>
+  <p *ngIf="versionService.versionInfo.appVersion">
+    V{{ versionService.versionInfo.appVersion }}
+  </p>
+</span>

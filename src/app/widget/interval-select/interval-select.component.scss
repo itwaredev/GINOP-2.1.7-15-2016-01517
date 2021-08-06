@@ -1,0 +1,42 @@
+@import 'src/variables';
+
+:host {
+    background-color: $color-white-gray;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    grid-row-gap: 0.5rem;
+    padding: 0.5rem;
+    span, fa-icon {
+        background-color: $color-bg-filter-vehicle;
+        border-radius: 100px;
+        padding: 0.25rem 0.5rem;
+        cursor: pointer;
+    }
+    span {
+        &.active {
+            background-color: $color-green;
+            color: $color-white-gray;
+        }
+        input {
+            background: unset;
+            border: unset;
+            width: 6rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        &.date-from {
+            grid-column: 2;
+        }
+        &.interval {
+            grid-row: 2;
+            font-size: 0.8rem;
+        }
+    }
+    fa-icon {
+        grid-row: 2;
+        &.disabled {
+            opacity: 0.3;
+        }
+    }
+}

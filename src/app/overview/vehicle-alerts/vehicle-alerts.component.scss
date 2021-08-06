@@ -1,0 +1,43 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    .notification-box {
+        background-color: $color-white;
+        border-radius: 3px;
+        box-shadow: 0px 3px 5px -1px rgba(0, 0, 0,0.2);
+        margin-bottom: 0.75rem;
+        padding: 0.5rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        fa-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            font-size: 1.9375rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            grid-row: 1 / span 2;
+            border-radius: 100px;
+            align-self: center;
+        }
+        .name, .license-plate {
+            font-weight: bold;
+            border-bottom: 1px solid $color-gray-light;
+            padding-bottom: 0.5rem;
+            grid-row: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .driver, .time {
+            padding-top: 0.5rem;
+            font-size: 0.875rem;
+            grid-row: 2;
+        }
+        .license-plate, .time {
+            text-align: right;
+        }
+    }
+}

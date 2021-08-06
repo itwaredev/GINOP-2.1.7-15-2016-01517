@@ -1,0 +1,59 @@
+.form-group {
+  mat-form-field {
+    width: 100%;
+    padding-bottom: 0.5rem;
+    mat-select {
+      width: 100%;
+    }
+  }
+  .mat-input-wrapper {
+    width: 100%
+  }
+}
+
+.error {
+  display: block;
+  position: absolute;
+  top: -18px;
+  color: red;
+  height: 16px;
+  width: 100%;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.mat-checkbox {
+  display: block;
+  min-height: 26px;
+  margin-top: 5px;
+}
+
+.mat-checkbox-disabled {
+  margin-left: 8px;
+}
+
+.debug-warn {
+  border: 2px solid red;
+}
+
+.flex-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.clear-date {
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  cursor: pointer;
+}
+
+h4 {
+  border-bottom: 1px dotted;
+  margin-bottom: 1rem;
+}
+
+textarea.mat-input-element {
+  padding: 0;
+}

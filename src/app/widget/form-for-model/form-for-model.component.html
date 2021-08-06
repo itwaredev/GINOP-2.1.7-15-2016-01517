@@ -1,0 +1,90 @@
+<form [formGroup]="myForm" novalidate *ngIf="metadata.groups" (ngSubmit)="onSubmit($event)" class="{{metadata.flex ? 'flex-form' : ''}}">
+  <button hidden type="submit"></button>
+  <div *ngFor="let group of metadata.groups" [class]="group.class">
+    <h4 *ngIf="group.title">{{ metadata.name + '.' + group.title | uppercase | translate }}</h4>
+    <div *ngFor="let field of group.fields" [class]="field.class" [class.debug-warn]="['autocomplete', 'object-select', 'cim', 'multiselect', 'localized', 'multiline'].indexOf(field.type) < 0 && !field.objectLabelField && (model || {})[field.name]?.toString() === '[object Object]'">
+      <div class="form-group" *ngIf="checkFieldDependency(field)">
+          <mat-form-field *ngIf="field.type == 'number'">
+              <input [readonly]="field.readOnly" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" matInput [min]="field.validators && field.validators.min !== undefined ? field.validators.min : defaultMinValue" [max]="field.validators && field.validators.max !== undefined ? field.validators.max : defaultMaxValue" matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [required]="field.validators && field.validators.required ? field.validators.required : false" type="number" formControlName="{{ field.name }}"  (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}"/>
+          </mat-form-field>
+          <mat-form-field *ngIf="field.type == 'text'">
+              <input [autocapitalize]="field.capitalize || 'sentences'" [readonly]="field.readOnly" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" [pattern]="field.validators && field.validators.pattern ? field.validators.pattern : ''" matInput matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [required]="field.validators && field.validators.required ? field.validators.required : false" type="text" formControlName="{{ field.name }}"  (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}"/>
+          </mat-form-field>
+          <mat-form-field *ngIf="field.type == 'textarea'">
+              <textarea [autocapitalize]="field.capitalize || 'sentences'" [readonly]="field.readOnly" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" matInput matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [required]="field.validators && field.validators.required ? field.validators.required : false" formControlName="{{ field.name }}"  (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" matTextareaAutosize [matAutosizeMinRows]="field.minRows || 1" [matAutosizeMaxRows]="field.maxRows || 4" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}"></textarea>
+          </mat-form-field>
+          <mat-form-field *ngIf="field.type == 'password'">
+              <input [autocapitalize]="field.capitalize || 'sentences'" [readonly]="field.readOnly" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" matInput matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [required]="field.validators && field.validators.required ? field.validators.required : false" formControlName="{{ field.name }}"  (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}" [type]="hidePassword ? 'password' : 'text'"/>
+              <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <mat-form-field *ngIf="field.type == 'email'">
+              <input [readonly]="field.readOnly" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" matInput matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [required]="field.validators && field.validators.required ? field.validators.required : false" type="email" formControlName="{{ field.name }}" (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}"/>
+          </mat-form-field>
+          <mat-form-field *ngIf="field.type == 'datepicker'" [class.disabled]="metadata.readonly || field.readOnly ? true : metadata.noCheck ? false : field.access ? !authService.hasAccess(field.access, formType()) : !authService.hasAccess(metadata.name, formType())">
+            <input class="datepicker" matInput matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" [readonly]="true" [min]="field.minDate" [max]="field.maxDate" [errorStateMatcher]="field.validators ? field.validators.errorState : ''" [required]="field.validators && field.validators.required ? field.validators.required : false" [style.cursor]="'pointer'" [matDatepicker]="picker" formControlName="{{ field.name }}" (dateChange)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" (click)="dateclick($event)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}">
+            <mat-datepicker-toggle [disabled]="false" matSuffix [for]="picker"></mat-datepicker-toggle>
+            <i class="fa fa-times clear-date" (click)="clearDate(field.name, field.subEntityName)" *ngIf="!metadata.readonly && !field.readOnly"></i>
+            <mat-datepicker [disabled]="false" #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-checkbox *ngIf="field.type == 'checkbox'" class="checkbox" formControlName="{{ field.name }}" (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" [checked]="model[field.name]"></mat-checkbox>
+          <mat-form-field [ngClass]="{'readonlySelect': metadata.readonly || field.readOnly}" *ngIf="field.type == 'select'">
+            <mat-select [errorStateMatcher]="field.validators ? field.validators.errorState : ''" [required]="field.validators && field.validators.required" matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" formControlName="{{ field.name }}" (selectionChange)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}">
+              <mat-option *ngFor="let option of options[field.name] | sortBy:(field.sortByValue ? undefined : (metadata.name + '.' + field.name + 'S.')):undefined:(!field.sortByValue && !field.notranslate):field.sortDirection" [value]="option">
+                {{ field.notranslate ? option : buildLabel(option, (field.prefix ? field.prefix + '.' : metadata.name + '.' + field.name + 'S.') + option) }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="mat-input-wrapper" *ngIf="field.type == 'multiselect'">
+            <mat-form-field [ngClass]="{'readonlySelect': metadata.readonly || field.readOnly}">
+              <mat-select 
+                [errorStateMatcher]="field.validators ? field.validators.errorState : ''" 
+                [required]="field.validators && field.validators.required ? field.validators.required : false" 
+                multiple 
+                matTooltip="{{ field.tooltip }}" 
+                [matTooltipPosition]="field.tooltipPosition || 'above'" 
+                formControlName="{{ field.name }}" 
+                (selectionChange)="updateModel(field.name, field.subEntityName)" 
+                (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" 
+                (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" 
+                placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}">
+                  <mat-option 
+                    *ngFor="let option of field.options | sortBy: (field.sortByValue ? undefined : metadata.name + '.' + field.name + 'S.'):field.objectLabelField:(!field.sortByValue && !field.notranslate)" 
+                    matTooltip="{{ option['tooltip'] }}" 
+                    [matTooltipPosition]="option['tooltipPosition'] || 'above'" 
+                    [value]="field.objectValueField ? option[field.objectValueField] : option['value']">
+                      {{ field.notranslate ? 
+                        option[field.objectLabelField] : 
+                        buildLabel(option[field.objectLabelField], metadata.name + '.' + field.name + 'S.' + option[field.objectLabelField]) }}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mat-input-wrapper" *ngIf="field.type === 'object-select'">
+            <mat-form-field [ngClass]="{'readonlySelect': metadata.readonly || field.readOnly}">
+              <mat-select [errorStateMatcher]="field.validators ? field.validators.errorState : ''" [required]="field.validators && field.validators.required" matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" formControlName="{{ field.name }}" (selectionChange)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)" placeholder="{{ metadata.name + '.' + (field.displayName || field.name) | uppercase | translate }}">
+                <mat-option *ngFor="let option of options[field.name] | sortBy: metadata.name + '.' + field.name + 'S.':field.objectLabelField:!field.notranslate" [value]="field.objectValueField ? option[field.objectValueField] : option['id']">
+                  {{ field.notranslate ? option[field.objectLabelField] : buildLabel(option[field.objectLabelField], metadata.name + '.' + field.name + 'S.' + option[field.objectLabelField]) }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mat-input-wrapper" *ngIf="field.type == 'multiline'">
+            <app-multiline [options]="options[field.name]" [prefix]="metadata.name" [field]="field" (change)="updateModel(field.name, field.subEntityName)" [required]="field.validators && field.validators.required" matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" formControlName="{{ field.name }}" (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)"></app-multiline>
+          </div>
+          <div class="mat-input-wrapper" *ngIf="field.type === 'dictionary-select'">
+            <mat-form-field [ngClass]="{'readonlySelect': metadata.readonly || field.readOnly}">
+              <mat-select [errorStateMatcher]="field.validators ? field.validators.errorState : ''" [disabled]="metadata.readonly || field.readOnly" [required]="field.validators && field.validators.required" matTooltip="{{ field.tooltip }}" [matTooltipPosition]="field.tooltipPosition || 'above'" formControlName="{{ field.name }}"  (change)="updateModel(field.name, field.subEntityName)" (blur)="field.blur ? field.blur() : onBlur(field.name, field.subEntityName)" (focus)="field.focus ? field.focus() : onFocus(field.name, field.subEntityName)">
+                <mat-option *ngFor="let option of options[field.name] | sortBy: undefined:'name':undefined:false" [value]="option['id']" [disabled]="option['disabled']">
+                  {{ option['name']}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="mat-input-wrapper" *ngIf="field.type == 'autocomplete'">
+            <app-autocomplete [parentFormControl]="myForm" [field]="field" [disabled]="metadata.readonly || field.readOnly" [rawInputSupport]="field.rawInputSupport" (updateModel)="updateModel(field.name, field.subEntityName)"></app-autocomplete>
+          </div>
+      </div>
+    </div>
+  </div>
+  <input hidden type="submit" style="position: absolute; left: -100vw;">
+</form>

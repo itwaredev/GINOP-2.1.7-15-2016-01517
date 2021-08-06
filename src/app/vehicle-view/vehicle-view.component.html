@@ -1,0 +1,31 @@
+<app-vehicle-selector #slideMenu (vehicleIdChange)="selectVehicle($event, false)"></app-vehicle-selector>
+
+<mat-tab-group #tabGroup headerPosition="below" (selectedTabChange)="changeTab($event.index)">
+  <mat-tab>
+    <ng-template mat-tab-label>
+        <fa-icon icon="compass"></fa-icon>
+    </ng-template>
+    <app-vehicle-status #tab [tabContainerGroup]="tabGroup" [tabIndex]="0"></app-vehicle-status>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+        <fa-icon icon="map" class="beta"></fa-icon>
+    </ng-template>
+    <app-vehicle-route #tab [tabContainerGroup]="tabGroup" [tabIndex]="1"></app-vehicle-route>
+  </mat-tab>
+  
+  <mat-tab>
+      <ng-template mat-tab-label>
+          <mat-icon [matBadge]="alerts.unseenCount" [matBadgeHidden]="!alerts.unseenCount" matBadgePosition="before">notifications</mat-icon>
+      </ng-template>
+      <app-vehicle-alerts #tab #alerts [tabContainerGroup]="tabGroup" [tabIndex]="2"></app-vehicle-alerts>
+  </mat-tab>
+
+  <mat-tab>
+      <ng-template mat-tab-label>
+          <fa-icon icon="chart-pie" class="beta"></fa-icon>
+      </ng-template>
+      <app-vehicle-reports #tab [hideSelector]="true" [tabContainerGroup]="tabGroup" [tabIndex]="3"></app-vehicle-reports>
+  </mat-tab>
+</mat-tab-group>

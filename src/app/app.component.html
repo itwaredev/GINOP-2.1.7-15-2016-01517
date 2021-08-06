@@ -1,0 +1,34 @@
+<app-loading-indicator></app-loading-indicator>
+<div class="header" *ngIf="authService.isLoggedIn() && !frameDisabled">
+    <span class="header-bars" *ngIf="!history[1] || (history[0].level || 0) >= (history[1].level || 0)">
+        <fa-icon icon="bars" (click)="menu.toggle()"></fa-icon>
+    </span>
+    <span class="header-item" (click)="historyService.back()" *ngIf="history[1] && (history[0].level || 0) < (history[1].level || 0)">
+        <fa-icon icon="angle-left"></fa-icon>
+         {{ history[0].title | translate }}
+    </span>
+    <span class="header-title">{{ (history[history.length - 1])?.title | translate }}</span>
+    <span class="search">
+        <fa-icon icon="search" class="search" (click)="showToaster()"></fa-icon>
+    </span>
+</div>
+<mat-sidenav-container>
+    <div (click)="menu.close()" class="content" [class.noframe]="frameDisabled">
+        <router-outlet></router-outlet>
+    </div>
+    <mat-sidenav #menu class="sidenav-menu" mode="over">
+        <span class="sidenav-item {{ item.class }}"
+            [ngClass]="{'disabled': !item.url && item.icon !== 'home'}"
+            [routerLink]="!item.url && item.icon !== 'home' ? './' : item.url"
+            *ngFor="let item of SIDENAV_ITEMS"
+            (click)="!item.url && item.icon !== 'home' ? showToaster() : menu.close()">
+            {{ (item.name ? ('SIDENAV_ITEMS.' + item.name.toUpperCase()) : '') | translate }}
+            <fa-icon icon="{{ item.icon }}" *ngIf="item.icon && item.icon !== 'new_releases'" [ngClass]="{'home-btn': item.icon === 'home'}"></fa-icon>
+            <mat-icon class="notification" *ngIf="item.icon === 'new_releases'">{{ item.icon }}</mat-icon>
+        </span>
+        <span class="sidenav-item logout" (click)="menu.close(); authService.logout();">
+            <fa-icon icon="sign-out-alt"></fa-icon>
+            <span>{{ 'TOOLBAR.LOGOUT' | translate }}</span>
+        </span>
+    </mat-sidenav>
+</mat-sidenav-container>

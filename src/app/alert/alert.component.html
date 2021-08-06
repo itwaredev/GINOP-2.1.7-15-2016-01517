@@ -1,0 +1,11 @@
+<mat-tab-group id="alert-setup" #tabGroup class="alert">
+  <mat-tab label="{{ 'ALERT.ALERTS' | translate }}">
+    <app-alert-setup #alertSetup [tabContainerGroup]="tabGroup" [tabIndex]="0" [users]="users" [contacts]="contacts" (setupClick)="tabGroup.selectedIndex = 2"></app-alert-setup>
+  </mat-tab>
+  <mat-tab label="{{ 'ALERT.REMINDERS' | translate }}">
+    <app-reminder-setup #reminderSetup [tabContainerGroup]="tabGroup" [tabIndex]="1" [users]="users" [contacts]="contacts" (setupClick)="tabGroup.selectedIndex = 2"></app-reminder-setup>
+  </mat-tab>
+  <mat-tab label="{{ 'ALERT.CONTACTS' | translate }}">
+    <app-contact [tabContainerGroup]="tabGroup" [tabIndex]="2" [users]="users" [contacts]="contacts" (contactModified)="alertSetup.ngOnChanges({'contacts':{}}); reminderSetup.ngOnChanges({'contacts':{}});"></app-contact>
+  </mat-tab>
+</mat-tab-group>

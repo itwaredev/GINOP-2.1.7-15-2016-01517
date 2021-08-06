@@ -1,0 +1,33 @@
+<div class="calendar-container">
+  <div class="calendar">
+    <input [matDatepicker]="picker" [max]="maxDate" (dateChange)="dateSelect($event.value)" [value]="selectedDate" disabled>
+    <fa-icon class="icon-calendar" [icon]="['far', 'calendar-alt']" (click)="picker.opened ? picker.close() : picker.open()"></fa-icon>
+    <mat-datepicker [disabled]="false" [startAt]="selectedDate" #picker></mat-datepicker>
+  </div>
+</div>
+<div id="route-map" #routeMap [style.height]="fullScreen ? '100vh' : 100-splitterLoc + '%'"></div>
+<div id="handle" [ngClass]="{'handle-active': firstTouch}" (touchstart)="handleMouse($event)" (mousedown)="handleMouse($event)" [style.bottom]="splitterLoc + '%'"></div>
+<div class="history-route" [style.height]="splitterLoc + '%'">
+  <ng-container *ngFor="let point of waypoints; let i = index">
+    <div class="history-distance" *ngIf="point.dist && point.arrivaltime > selectedDate.getTime()">
+      {{ ((point.dist || 0) / 1000).toFixed(2) }} km
+      <span class="driver">{{ driverList[point.personId]?.name }}</span>
+      <fa-icon class="online" [ngClass]="{'private': point.pswitch === '1'}" [icon]="point.pswitch === '1' ? ['fa','user-secret'] : ['fa','user-tie']"></fa-icon>
+    </div>
+    <div class="history-detail" [id]="'wp.' + point.id" *ngIf="point.arrivaltime < selectedToDate.getTime()" (click)="pointClicked(point)">
+      <span class="history-index" [ngClass]="{'connect-line-down': i < waypoints.length - 1, 'connect-line-up': point.dist !== 0 && point.arrivaltime > selectedDate.getTime()}">{{ i + 1}}</span>
+      <span>
+        <p>
+          <b>
+            {{point.arrivaltime > selectedDate.getTime() ? (point.arrivaltime | safedate:'time') : ''}}
+            {{point.departuretime && point.departuretime < selectedToDate.getTime() ? ' - ' + (point.departuretime | safedate:'time') : ''}}
+          </b>
+            - 
+          {{(point.arrivaltime > selectedDate.getTime() ? point.arrivaltime : (point.departuretime || point.arrivaltime)) | safedate:'date'}}
+        </p>
+        <p><b>{{point.address}}</b></p>
+      </span>
+    </div>
+  </ng-container>
+  <span class="notice" *ngIf="!waypoints || !waypoints.length">{{ waypointLabel }}</span>
+</div>

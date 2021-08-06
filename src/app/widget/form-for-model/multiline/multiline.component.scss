@@ -1,0 +1,22 @@
+fa-icon {
+    padding: 0.5rem 0;
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+.section {
+    padding-bottom: 0.75rem;
+    .section-head {
+        width: 100%;
+        padding-bottom: 0.5rem;
+        .section-title {
+            min-width: 100px;
+            display: inline-block
+        }
+    }
+    .section-body {
+        .subsection {
+            width: 8rem;
+            margin-right: 1.25rem;
+        }
+    }
+}

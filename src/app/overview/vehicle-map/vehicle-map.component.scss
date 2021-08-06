@@ -1,0 +1,50 @@
+@import 'src/variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.top-info {
+    background-color: $color-bg-upper-slide-selector;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    display: flex;
+    .info {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        display: inline-block;
+        span {
+            margin-right: 0.5rem;
+        }
+        span:not(.node) {
+            font-size: 0.9375rem;
+        }
+    }
+    > div:not(.info) {
+        margin-top: 0.25rem;
+        margin-left: auto;
+        display: flex;
+        fa-icon {
+            border-radius: 100px;
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-right: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: $color-green;
+            background-color: $color-white;
+            border: 2px $color-green solid;
+            &.inverse {
+                color: $color-white;
+                background-color: $color-green;
+            }
+        }
+    }
+}
+#map {
+    height: 100%;
+}

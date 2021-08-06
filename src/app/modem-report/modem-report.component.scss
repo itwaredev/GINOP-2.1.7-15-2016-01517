@@ -1,0 +1,21 @@
+@import 'src/variables';
+
+:host {
+    @include component;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    app-form-for-model {
+        width: 30rem;
+        display: block;
+        margin: auto;
+    }
+    button {
+        margin-right: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+    }
+    app-page-scroll-table {
+        flex: 1;
+    }
+}
